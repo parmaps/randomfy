@@ -3,10 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const querystring = require("querystring");
 const request = require("request"); // "Request" library
 
-type Data = {
-  name: string;
-};
-
 type Response = {
   statusCode: number;
 };
@@ -14,27 +10,30 @@ type Response = {
 type Body = {
   access_token: string;
   refresh_token: string;
+  error: any;
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
+  // TODO 10/6 State for Security
   // var state = generateRandomString(16);
-
-  const code = req.query.code || null;
-  console.log("code: " + code);
   // const state = req.query.state || null;
   // const storedState = req.cookies ? req.cookies[stateKey] : null;
+
+  // console.log("code: " + code);
+
+  const auth_url: string = "https://accounts.spotify.com/api/token";
+  const code = req.query.code || null;
+  const redirect_uri: string = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
   const client_id: string = process.env.NEXT_PUBLIC_CLIENT_ID as string;
   const client_secret: string = process.env.CLIENT_SECRET as string;
-  const redirect_uri: string = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
   const authorization: string =
     "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64");
 
-  // const auth_url:string = "https://accounts.spotify.com/api/token"
   let authOptions = {
-    url: "https://accounts.spotify.com/api/token",
+    url: auth_url,
     method: "POST",
     form: {
       code: code,
@@ -50,20 +49,18 @@ export default async function handler(
   request.post(
     authOptions,
     function (error: string, response: Response, body: Body) {
-      // console.log("error:", error)
-      // console.log("response:", response)
-      console.log("client_id", client_id);
-      console.log("client_secret", client_secret);
-      console.log("authorization", authorization);
-      console.log("body:", body);
+      console.log("request body:", body);
 
       if (!error && response.statusCode === 200) {
-        const access_token = body.access_token;
-        const refresh_token = body.refresh_token;
+        const access_token: string = body.access_token;
+        const refresh_token: string = body.refresh_token;
+        // WIP 10/6 change flow to DB and delete this
+        // Generate fake access token to check refresh token flow
+        const fake_access_token = "1234";
 
         var options = {
           url: "https://api.spotify.com/v1/me",
-          headers: { Authorization: "Bearer " + access_token },
+          headers: { Authorization: "Bearer " + fake_access_token },
           json: true,
         };
 
@@ -72,19 +69,19 @@ export default async function handler(
           options,
           function (error: string, response: Response, body: Body) {
             console.log("request get ME body", body);
+            // refresh access token if current is invalid
+            if (body.error.status === 401) {
+              // redirect to /refresh_token
+              res.redirect(
+                "/api/refresh_token?" +
+                  querystring.stringify({
+                    access_token: access_token,
+                    refresh_token: refresh_token,
+                  })
+              );
+            }
           }
         );
-
-        res.redirect("/");
-
-        // we can also pass the token to the browser to make requests from there
-        // res.redirect(
-        //   "/#" +
-        //     querystring.stringify({
-        //       access_token: access_token,
-        //       refresh_token: refresh_token,
-        //     })
-        // );
       } else {
         res.redirect(
           "/#" +

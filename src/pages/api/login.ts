@@ -2,13 +2,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 const querystring = require("querystring");
 
-type Data = {
-  name: string;
-};
-
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   // var state = generateRandomString(16);
   const scope: string = "user-read-private user-read-email";
@@ -23,6 +19,7 @@ export default function handler(
         scope: scope,
         redirect_uri: redirect_uri,
         // state: state
+        show_dialog: true
       })
   );
 }

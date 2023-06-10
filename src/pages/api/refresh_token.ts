@@ -53,7 +53,7 @@ export default function handler(
         console.log("new access token: " + access_token);
 
         var options = {
-          url: "https://api.spotify.com/v1/me",
+          url: "https://api.spotify.com/v1/me/top/artists",
           headers: { Authorization: "Bearer " + access_token },
           json: true,
         };
@@ -62,7 +62,7 @@ export default function handler(
         request.get(
           options,
           function (error: string, response: Response, body: Body) {
-            console.log("request get ME body w/ new access token", body);
+            console.log("request get ME body w/ new access token", JSON.stringify(body));
           }
         );
 

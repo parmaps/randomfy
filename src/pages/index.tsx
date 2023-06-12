@@ -1,9 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+// import styles from "@/styles/Home.module.scss";
+import styles from "../styles/Home.module.scss"
 
-const inter = Inter({ subsets: ['latin'] })
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -15,62 +17,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>          
-          <div>
-            {/* <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a> */}
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
+        <div className={styles.description}>
+          <div className={styles.center}>
             <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
+              className={styles.logo}
+              src="/randomfy-logo.png"
+              alt="Randomfy Logo"
+              width={60}
+              height={60}
               priority
             />
           </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>          
+          <div className={styles.center}>
+            <a
+              // href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              className={styles.card}
+              target="_blank"
+              rel="noopener noreferrer">
+              <h2 className={inter.className}>Randomfy</h2>
+              {/* <p className={inter.className}>
+              Find information about Randomfy features.
+            </p> */}
+            </a>
+          </div>
         </div>
       </main>
     </>
-  )
+  );
 }

@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import Slogan from "@/components/Slogan";
 import styles from "../styles/Home.module.scss";
-import Logo from "@/components/Logo";
-import Brand from "@/components/Brand";
+import Logo from "@/components/Logo/Logo";
+import Brand from "@/components/Logo/Brand";
+import SearchForm from "@/components/SearchForm/SearchForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,10 +24,8 @@ export default function Home() {
           <div className={styles.center}>
             <Brand />
           </div>
-          {/* <div className={styles.center}>
-            <Slogan></Slogan>
-          </div> */}
         </div>
+        <SearchForm></SearchForm>
       </main>
     </>
   );

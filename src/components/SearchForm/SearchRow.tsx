@@ -1,24 +1,25 @@
 import React from "react";
-import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
+import { Inter } from "@next/font/google";
 import styles from "../../styles/Form.module.scss";
 import { FormValues } from "@/types/form";
 
-type Props = { register: UseFormRegister<FormValues>; errors: any };
+const inter = Inter({ subsets: ["latin"] });
+type Props = { register: UseFormRegister<FormValues>; errors: any; field: any, placeholder: string };
 
-
-const SearchRow = ({ register, errors }: Props) => {
-  console.log(errors)
+const SearchRow = ({ register, errors, field, placeholder }: Props) => {
+  console.log(errors);
   return (
     <>
       <input
-        className={styles.searchRow}
-        {...register("artist", { required: true })}
-        placeholder="Artist Name"
-      />    
-     
+        className={`${styles.artistBtn} ${inter.className}`}
+        {...register(field, { required: true })}
+        placeholder={placeholder}
+      />
+
       {/* errors will return when field validation fails  */}
       {/* TODO 14/6 agregar className    */}
-      {errors.artist && <span>Required Field</span>}
+      {errors[field] && <span>Required Field</span>}
     </>
   );
 };

@@ -5,21 +5,26 @@ import styles from "../../styles/Form.module.scss";
 import { FormValues } from "@/types/form";
 
 const inter = Inter({ subsets: ["latin"] });
-type Props = { register: UseFormRegister<FormValues>; errors: any; field: any, placeholder: string };
+type Props = {
+  register: UseFormRegister<FormValues>;
+  errors: any;
+  field: any;
+  placeholder: string;
+};
 
 const SearchRow = ({ register, errors, field, placeholder }: Props) => {
-  console.log(errors);
+  // console.log(errors);
   return (
     <>
       <input
-        className={`${styles.artistBtn} ${inter.className}`}
+        className={`${styles.fieldBtn} ${inter.className}`}
         {...register(field, { required: true })}
         placeholder={placeholder}
       />
 
       {/* errors will return when field validation fails  */}
       {/* TODO 14/6 agregar className    */}
-      {errors[field] && <span>Required Field</span>}
+      {/* {errors[field] && <span className={`${styles.error} ${inter.className}`}>Required Field</span>} */}
     </>
   );
 };

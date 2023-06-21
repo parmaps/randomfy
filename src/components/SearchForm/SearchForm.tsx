@@ -27,7 +27,7 @@ const SearchForm = (props: Props) => {
             register={register}
             errors={errors}
             field={"artists"}
-            placeholder="Add some Artists..."
+            placeholder="Choose some Artists..."
           />
           <AddRow />
         </div>
@@ -40,7 +40,7 @@ const SearchForm = (props: Props) => {
             register={register}
             errors={errors}
             field={"genres"}
-            placeholder="Add some Genres..."
+            placeholder="Choose some Genres..."
           />
           <AddRow />
         </div>
@@ -53,7 +53,7 @@ const SearchForm = (props: Props) => {
             register={register}
             errors={errors}
             field={"features"}
-            placeholder="Add some Features..."
+            placeholder="Choose some Features..."
           />
           <AddRow />
         </div>

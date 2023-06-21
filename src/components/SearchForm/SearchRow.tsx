@@ -5,7 +5,12 @@ import styles from "../../styles/Form.module.scss";
 import { FormValues } from "@/types/form";
 
 const inter = Inter({ subsets: ["latin"] });
-type Props = { register: UseFormRegister<FormValues>; errors: any; field: any, placeholder: string };
+type Props = {
+  register: UseFormRegister<FormValues>;
+  errors: any;
+  field: any;
+  placeholder: string;
+};
 
 const SearchRow = ({ register, errors, field, placeholder }: Props) => {
   // console.log(errors);

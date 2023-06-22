@@ -19,8 +19,10 @@
     font-size: 12px;
 
     @include small {
-
         font-size: 13.33px;
+    }
+    @include medium {
+        font-size: 15px;
     }
 }
 
@@ -43,24 +45,36 @@
 
 
 .select {
-
-    min-width: 250px;
+    min-width: 20px;
     width: auto;
 
     div {
+        // overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         padding: 0;
         border-radius: 15px !important;
         background-color: $grey !important;
         color: $font-color-light;
         border-color: transparent !important;
+        width: 275px;
 
-
-        &:focus-within {
-            box-shadow: none !important;
+        @include small {
+            width: 350px !important;
         }
 
-        &:focus-visible {
-            box-shadow: 0 0 0px 1px $dark-green !important;
+        @include medium {
+            width: 450px !important;
+        }
+
+        label {
+            background: none !important;
+        }
+
+        input[type="checkbox"] {
+            background-color: $red;
+            accent-color: $darker-green;
+
         }
 
         button {
@@ -71,21 +85,35 @@
                 // stroke: $font-color;
             }
         }
-    }
 
-    @include small {
-        min-width: 350px;
-    }
-
-    @include small-medium {
-        min-width: 250px;
-
-        div {
-            width: 550px;
+        span {
+            margin-left: 2.5px;
         }
 
 
+        &:focus-within {
+            box-shadow: none !important;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0px 1px $dark-green !important;
+        }
     }
+
+    /* .select media queries */
+    @include small {
+        width: 350px;
+    }
+
+    @include small-medium {
+        width: 350px;
+    }
+
+    @include medium {
+        width: 450px;
+    }
+
+
 }
 
 .btn {
@@ -104,12 +132,7 @@
             box-shadow: 0 0 0px 1px $dark-green;
             outline: $dark-green solid 1px;
         }
-
     }
-
-
-
-    // border-radius: 5px;
 }
 
 .fieldBtn {
@@ -120,12 +143,16 @@
     font-size: 12px;
 
     @include small {
-        font-size: 13.33px;
+        // font-size: 13.33px;
         width: 150px;
     }
 
     @include small-medium {
         width: 250px;
+    }
+
+    @include medium {
+        // font-size: 14px;
     }
 
 }

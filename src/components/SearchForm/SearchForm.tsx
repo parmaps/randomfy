@@ -5,6 +5,8 @@ import styles from "../../styles/Form.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormValues } from "@/types/form";
 import AddRow from "./AddRow";
+import Select from "./Select";
+import { OPTIONS_ARTISTS, OPTIONS_FEATURES, OPTIONS_GENRES } from "./OptionsData";
 
 const inter = Inter({ subsets: ["latin"] });
 type Props = {};
@@ -19,43 +21,66 @@ const SearchForm = (props: Props) => {
   const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.searchMenu}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={`${styles.searchMenu} ${inter.className}`}>
       <fieldset className={styles.artists}>
         <legend className={inter.className}>Artists</legend>
         <div className={styles.row}>
-          <SearchRow
+          <Select optionsList={OPTIONS_ARTISTS} isCreatable={true}/>
+          {/* <SearchRow
             register={register}
             errors={errors}
             field={"artists"}
-            placeholder="Choose some Artists..."
+            placeholder="Add some Artists..."
           />
-          <AddRow />
+          <AddRow /> */}
+          {/* <SearchRow
+            register={register}
+            errors={errors}
+            field={"search-artists"}
+            placeholder="Your Artists"
+          /> */}
         </div>
       </fieldset>
 
       <fieldset className={styles.genres}>
         <legend className={inter.className}>Genres</legend>
         <div className={styles.row}>
-          <SearchRow
+          <Select optionsList={OPTIONS_GENRES} isCreatable={false}/>
+          {/* <SearchRow
             register={register}
             errors={errors}
             field={"genres"}
-            placeholder="Choose some Genres..."
+            placeholder="Add some Genres..."
           />
           <AddRow />
+          <SearchRow
+            register={register}
+            errors={errors}
+            field={"search-genres"}
+            placeholder="Your Genres"
+          /> */}
         </div>
       </fieldset>
 
       <fieldset className={styles.features}>
         <legend className={inter.className}>Audio Features</legend>
         <div className={styles.row}>
-          <SearchRow
+          <Select optionsList={OPTIONS_FEATURES} isCreatable={false}/>
+          {/* <SearchRow
             register={register}
             errors={errors}
             field={"features"}
-            placeholder="Choose some Features..."
-          />
-          <AddRow />
+            placeholder="Add some Features..."
+          /> */}
+          {/* <AddRow /> */}
+          {/* <SearchRow
+            register={register}
+            errors={errors}
+            field={"search-features"}
+            placeholder="Your Features"
+          /> */}
         </div>
       </fieldset>
       <input

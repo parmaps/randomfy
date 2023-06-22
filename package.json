@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.9.0",
+    "react-multi-select-component": "^4.3.4",
     "request": "^2.88.2",
     "sass": "^1.63.3",
     "typescript": "5.0.4"

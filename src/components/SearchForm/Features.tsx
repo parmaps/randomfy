@@ -11,8 +11,8 @@ const Features: React.FC = (props: Props) => {
   return (
     <div>
       <ul className={styles.featuresList}>
-        {features.map((feature) => (
-          <FeatureItem key={feature.value} feature={feature} />
+        {features.map((feature, i, arr) => (
+          <FeatureItem key={feature.value} feature={feature} i={i} len={arr.length}/>
         ))}
       </ul>
     </div>

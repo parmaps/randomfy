@@ -8,21 +8,9 @@ type Props = {
   isCreatable: boolean
 };
 
-// TODO agregar props para parametrizar -> options
 
 const Select = ({optionsList, isCreatable}: Props) => {
-  const OPTIONS_LIST = [
-    { label: "Rock", value: "rock" },
-    { label: "Alternative", value: "alternative" },
-    { label: "Samba", value: "samba" },
-    { label: "IDM", value: "IDM" },
-    { label: "Electronic", value: "electronic" },
-    { label: "Reggae 🍎", value: "reggae" },
-    { label: "Tangerine", value: "tangerine" },
-    { label: "Pineapple", value: "pineapple" },
-    { label: "Peach", value: "peach" },
-  ];
-
+ 
   const [selected, setSelected] = useState([]);
   const [options, setOptions] = useState(optionsList);
 

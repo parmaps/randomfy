@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import FeatureItem from "./FeatureItem";
-import styles from '../../styles/Form.module.scss'
+import FeatureItem from "./Feature";
+import styles from "../../styles/Form.module.scss";
 import { OPTIONS_FEATURES } from "./OptionsData";
 
 type Props = {};
 
-const Features: React.FC = (props: Props) => {
+const Features = (props: Props) => {
   const [features, setFeatures] = useState(OPTIONS_FEATURES);
 
   return (
-    <div>
+    <div className={styles.featuresBody}>
+      <div className={styles.minMaxRow}>
+        <p id={styles.min}>Min</p>
+        <p id={styles.max}>Max</p>
+      </div>
       <ul className={styles.featuresList}>
-        {features.map((feature, i, arr) => (
-          <FeatureItem key={feature.value} feature={feature} i={i} len={arr.length}/>
+        {features.map((feature, index, arr) => (
+          <FeatureItem
+            key={feature.value}
+            feature={feature}
+            index={index}
+            len={arr.length}
+          />
         ))}
       </ul>
     </div>

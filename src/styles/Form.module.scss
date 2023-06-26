@@ -2,242 +2,12 @@
 @import './base/breakpoints';
 @import './base/sizes';
 
+
 .searchMenu {
     display: flex;
     flex-direction: column;
     // align-items: center;
     justify-content: center;
-
-}
-
-.fieldsets {
-    margin: 5px;
-    padding: 7.5px;
-    background-color: $grey;
-    border-color: $dark-green;
-    border-radius: 5px;
-    color: $font-color-light;
-    font-size: $font-small;
-
-
-    @include small {
-        font-size: $font-small-medium;
-    }
-
-    @include medium {
-        font-size: $font-medium;
-    }
-}
-
-.artists {
-    @extend .fieldsets;
-}
-
-.genres {
-    @extend .fieldsets;
-}
-
-.features {
-    @extend .fieldsets;
-    padding-bottom: 10px;
-
-    @include small {
-        padding-bottom: 5px;
-    }
-}
-
-
-.row {
-    display: flex;
-}
-
-.minMaxRow {
-    @extend .row;
-    justify-content: end;
-
-    p {
-        color: $font-color;
-        font-size: $font-mobile;
-        margin-right: 5px;
-        margin-bottom: 5px;
-
-        @include small {
-            width: 23.5px;
-        }
-
-        @include small-medium {
-            font-size: 11.5px;
-            margin-right: 5px;
-        }
-
-        @include medium {
-            font-size: 14px;
-            margin-bottom: 5px;
-            width: 30px;
-        }
-
-        @include large {
-            font-size: 14px;
-        }
-
-
-    }
-
-
-}
-
-#min {
-    position: relative;
-    right: 3.5px;
-
-    @include small {
-        right: 2px;
-    }
-    @include small-medium {
-        right: 3px;
-    }
-   
-    @include medium {
-        right: 5px;
-    }
-    @include large {
-        right: 5px;
-    }
-}
-
-.featuresBody {
-    display: flex;
-    flex-direction: column;
-}
-
-.featureRow {
-    display: flex;
-    align-items: center;
-
-    input {
-        background-color: transparent;
-        border: 1px solid $font-color-dark;
-        border: 1px solid $darkerish-green;
-        max-width: 23.5px;
-        height: 22.5px;
-        color: $font-color;
-        margin-right: 5px;
-        margin-top: 2.5px;
-        text-align: center;
-        border-radius: 10px;
-        font-size: $font-mobile;
-        -moz-appearance: textfield;
-
-        &:focus-visible,
-        &:focus-within {
-            box-shadow: 0 0 0px 1px $darker-green;
-            outline: $darker-green solid 1px;
-        }
-
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        @include small {
-            font-size: $font-small;
-            max-width: 26.5px;
-            height: 25px;
-        }
-
-        @include medium {
-            margin-right: 7.5px;
-            max-width: 32.5px;
-            height: 30px;
-            font-size: 14px;
-        }
-    }
-}
-
-
-.select {
-    min-width: 20px;
-    width: auto;
-    display: flex;
-    align-items: center;
-    max-height: 30px;
-
-    div {
-        // overflow-x: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding-right: 0 !important;
-        // padding-left: 10px !important;
-        border-radius: 15px !important;
-        background-color: $grey !important;
-        color: $font-color-light;
-        border-color: transparent !important;
-        width: $field-mobile;
-
-
-        @include small {
-            width: $field-small !important;
-        }
-
-        @include medium {
-            width: $field-medium !important;
-        }
-
-        label {
-            background: none !important;
-        }
-
-        input[type="checkbox"] {
-            background-color: $red;
-            accent-color: $darker-green;
-        }
-
-        button {
-            position: relative;
-            right: 2.5px;
-
-           
-        }
-        svg {
-            // stroke: $red;
-            // height: 16px;
-            // width: 16px;
-            stroke-width: 1.5px;
-
-            @include small {
-                stroke-width: 2px;
-            }
-            
-        }
-
-        span {
-            margin-left: 2.5px;
-        }
-
-
-        &:focus-within {
-            box-shadow: none !important;
-        }
-
-        &:focus-visible {
-            box-shadow: 0 0 0px 1px $dark-green !important;
-        }
-    }
-
-    /* .select media queries */
-    @include small {
-        width: 350px;
-        max-height: 35px;
-    }
-
-    @include small-medium {
-        max-height: 40px;
-    }
-
-    @include medium {
-        width: 450px
-    }
 }
 
 .btn {
@@ -261,69 +31,6 @@
     @include small-medium {
         min-height: 25px;
     }
-}
-
-.field {
-    @extend .btn;
-    padding: 5px 10px;
-    width: 220px;
-    font-size: $font-small;
-    margin: 0px 3px;
-    margin-bottom: 0px;
-    border-radius: 0px;
-    // border-bottom: 1px solid $white;
-
-    @include small {
-        font-size: $font-small-medium;
-        width: 350px;
-    }
-
-
-    @include medium {
-        font-size: $font-medium;
-    }
-
-    @include medium {
-        width: 450px;
-    }
-
-}
-
-.divider {
-    border-color: $darkest-green;
-    margin-top: 7.5px;
-    margin-bottom: 10px;
-
-    @include small {
-        margin-top: 0px;
-    }
-
-    @include small-medium {
-        margin-bottom: 15px;
-    }
-
-    @include medium {
-        margin-top: 10px;
-    }
-}
-
-.featuresList {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.addBtn {
-    color: $darker-green;
-    font-size: 20px;
-    margin: auto 0;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.error {
-    font-size: 12px;
-    color: $red;
 }
 
 .submitBtn {
@@ -358,4 +65,17 @@
         min-height: 45px;
         max-height: 6vh;
     }
+}
+
+.addBtn {
+    color: $darker-green;
+    font-size: 20px;
+    margin: auto 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.error {
+    font-size: 12px;
+    color: $red;
 }

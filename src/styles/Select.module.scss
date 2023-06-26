@@ -1,0 +1,87 @@
+@import "./base/breakpoints";
+@import "./base/colors";
+@import "./base/sizes";
+
+
+.select {
+    min-width: 20px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    max-height: 30px;
+
+    div {
+        // overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-right: 0 !important;
+        // padding-left: 10px !important;
+        border-radius: 15px !important;
+        background-color: $grey !important;
+        color: $font-color-light;
+        border-color: transparent !important;
+        width: $field-mobile;
+
+
+        @include small {
+            width: $field-small !important;
+        }
+
+        @include medium {
+            width: $field-medium !important;
+        }
+
+        label {
+            background: none !important;
+        }
+
+        input[type="checkbox"] {
+            background-color: $red;
+            accent-color: $darker-green;
+        }
+
+        button {
+            position: relative;
+            right: 2.5px;
+        }
+
+        svg {
+            // stroke: $red;
+            // height: 16px;
+            // width: 16px;
+            stroke-width: 1.5px;
+
+            @include small {
+                stroke-width: 2px;
+            }
+
+        }
+
+        span {
+            margin-left: 2.5px;
+        }
+
+
+        &:focus-within {
+            box-shadow: none !important;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0px 1px $dark-green !important;
+        }
+    }
+
+    /* .select media queries */
+    @include small {
+        width: 350px;
+        max-height: 35px;
+    }
+
+    @include small-medium {
+        max-height: 40px;
+    }
+
+    @include medium {
+        width: 450px
+    }
+}

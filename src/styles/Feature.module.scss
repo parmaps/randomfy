@@ -1,0 +1,92 @@
+@import "./base/breakpoints";
+@import "./base/colors";
+@import "./base/sizes";
+
+
+.featureRow {
+    display: flex;
+    align-items: center;
+
+    input {
+        background-color: transparent;
+        border: 1px solid $font-color-dark;
+        border: 1px solid $darkerish-green;
+        max-width: 23.5px;
+        height: 22.5px;
+        color: $font-color;
+        margin-right: 5px;
+        margin-top: 2.5px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: $font-mobile;
+        -moz-appearance: textfield;
+
+        &:focus-visible,
+        &:focus-within {
+            box-shadow: 0 0 0px 1px $darker-green;
+            outline: $darker-green solid 1px;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        @include small {
+            font-size: $font-small;
+            max-width: 26.5px;
+            height: 25px;
+        }
+
+        @include medium {
+            margin-right: 7.5px;
+            max-width: 32.5px;
+            height: 30px;
+            font-size: 14px;
+        }
+    }
+}
+
+.field {
+    padding: 5px 10px;
+    width: 220px;
+    font-size: $font-small;
+    margin: 0px 3px;
+    margin-bottom: 0px;
+    border-radius: 0px;
+    // border-bottom: 1px solid $white;
+
+    @include small {
+        font-size: $font-small-medium;
+        width: 350px;
+    }
+
+
+    @include medium {
+        font-size: $font-medium;
+    }
+
+    @include medium {
+        width: 450px;
+    }
+
+}
+
+.divider {
+    border-color: $darkest-green;
+    margin-top: 7.5px;
+    margin-bottom: 10px;
+
+    @include small {
+        margin-top: 0px;
+    }
+
+    @include small-medium {
+        margin-bottom: 15px;
+    }
+
+    @include medium {
+        margin-top: 10px;
+    }
+}

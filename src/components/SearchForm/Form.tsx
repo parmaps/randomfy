@@ -9,7 +9,6 @@ import {
   OPTIONS_FEATURES,
   OPTIONS_GENRES,
 } from "./OptionsData";
-import Features from "./Features";
 import Fieldset from "./Fieldset";
 
 const inter = Inter({ subsets: ["latin"] });

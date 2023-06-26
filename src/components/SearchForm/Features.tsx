@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FeatureItem from "./Feature";
-import styles from "../../styles/Form.module.scss";
+import styles from "../../styles/Features.module.scss";
 import { OPTIONS_FEATURES } from "./OptionsData";
 
 type Props = {};
@@ -15,6 +15,7 @@ const Features = (props: Props) => {
         <p id={styles.max}>Max</p>
       </div>
       <ul className={styles.featuresList}>
+        {/* TODO 26/6 refactor logic */}
         {features.map((feature, index, arr) => (
           <FeatureItem
             key={feature.value}

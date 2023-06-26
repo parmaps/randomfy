@@ -1,0 +1,72 @@
+@import "./base/breakpoints";
+@import "./base/colors";
+@import "./base/sizes";
+
+
+// .featuresBody {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+.row {
+    display: flex;
+}
+
+.minMaxRow {
+    @extend .row;
+    justify-content: end;
+
+    p {
+        color: $font-color;
+        font-size: $font-mobile;
+        margin-right: 5px;
+        margin-bottom: 5px;
+
+        @include small {
+            width: 23.5px;
+        }
+
+        @include small-medium {
+            font-size: 11.5px;
+            margin-right: 5px;
+        }
+
+        @include medium {
+            font-size: 14px;
+            margin-bottom: 5px;
+            width: 30px;
+        }
+
+        @include large {
+            font-size: 14px;
+        }
+    }
+}
+
+
+#min {
+    position: relative;
+    right: 3.5px;
+
+    @include small {
+        right: 2px;
+    }
+
+    @include small-medium {
+        right: 3px;
+    }
+
+    @include medium {
+        right: 5px;
+    }
+
+    @include large {
+        right: 5px;
+    }
+}
+
+.featuresList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
-import styles from "../../styles/Form.module.scss";
+import styles from "../../styles/Select.module.scss";
 import { OptionsValues } from "@/types/form";
 
 type Props = {

@@ -1,0 +1,30 @@
+@import "./base/breakpoints";
+@import "./base/colors";
+@import "./base/sizes";
+
+.fieldsets {
+    margin: 5px;
+    padding: 7.5px;
+    background-color: $grey;
+    border-color: $dark-green;
+    border-radius: 5px;
+    color: $font-color-light;
+    font-size: $font-small;
+
+    @include small {
+        font-size: $font-small-medium;
+    }
+
+    @include medium {
+        font-size: $font-medium;
+    }
+}
+
+.features {
+    @extend .fieldsets;
+    padding-bottom: 10px;
+
+    @include small {
+        padding-bottom: 5px;
+    }
+}

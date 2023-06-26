@@ -1,7 +1,7 @@
 // TODO 22/6 -> refactor <fieldset></fieldset> de SearchForm aca para parametrizar
 
 import React from "react";
-import styles from "../../styles/Form.module.scss";
+import styles from "../../styles/Fieldset.module.scss";
 import { Inter } from "@next/font/google";
 import Select from "./Select";
 import { OptionsValues } from "@/types/form";
@@ -27,7 +27,7 @@ const Fieldset = ({ legendText, optionsList, component }: Props) => {
   const featuresComponent = isComponent("Features") && <Features />;
 
   return (
-    <fieldset className={styles.artists}>
+    <fieldset className={styles.fieldsets}>
       <legend className={inter.className}>{legendText}</legend>
       {selectComponent}
       {featuresComponent}

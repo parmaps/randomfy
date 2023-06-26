@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Form.module.scss";
+import styles from "../../styles/Feature.module.scss";
 import { OptionsValues } from "@/types/form";
 
 type Props = { feature: OptionsValues; index: number; len: number };

@@ -1,17 +1,9 @@
 // Initiate the authorization request
+import { Body, Response } from "@/types/form";
 import type { NextApiRequest, NextApiResponse } from "next";
 const querystring = require("querystring");
 const request = require("request"); // "Request" library
 
-type Response = {
-  statusCode: number;
-};
-
-type Body = {
-  access_token: string;
-  refresh_token: string;
-  error: any;
-};
 
 export default async function handler(
   req: NextApiRequest,

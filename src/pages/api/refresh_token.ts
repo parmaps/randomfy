@@ -1,19 +1,7 @@
 // Initiate the authorization request
+import { Body, Data, Response } from "@/types/form";
 import type { NextApiRequest, NextApiResponse } from "next";
 const request = require("request"); // "Request" library // FIXME 10/6 change to Fetch API
-
-type Data = {
-  access_token: string;
-};
-
-type Response = {
-  statusCode: number;
-};
-
-type Body = {
-  access_token: string;
-  refresh_token: string;
-};
 
 export default function handler(
   req: NextApiRequest,
@@ -24,7 +12,7 @@ export default function handler(
   const client_id: string = process.env.NEXT_PUBLIC_CLIENT_ID as string;
   const client_secret: string = process.env.CLIENT_SECRET as string;
   const authorization: string =
-  "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64");
+    "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64");
   const refresh_token: string = req.query.refresh_token as string;
 
   console.log("refresh_token from /api/refresh_token", refresh_token);
@@ -62,9 +50,14 @@ export default function handler(
         request.get(
           options,
           function (error: string, response: Response, body: Body) {
-            console.log("request get ME body w/ new access token", JSON.stringify(body));
+            console.log(
+              "request get ME body w/ new access token",
+              JSON.stringify(body)
+            );
           }
         );
+
+        // TODO 27/6 guardar este access token en algun lado
 
         // res.send({
         //   access_token: access_token,

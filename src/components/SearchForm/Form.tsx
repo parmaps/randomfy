@@ -10,6 +10,7 @@ import {
   OPTIONS_GENRES,
 } from "./OptionsData";
 import Fieldset from "./Fieldset";
+import useFetchGenres from "@/hooks/useFetchGenres";
 
 const inter = Inter({ subsets: ["latin"] });
 type Props = {};
@@ -41,7 +42,7 @@ const SearchForm = (props: Props) => {
 
       <Fieldset
         legendText="Features"
-        optionsList={OPTIONS_GENRES}
+        optionsList={OPTIONS_FEATURES}
         component="Features"
       />
 

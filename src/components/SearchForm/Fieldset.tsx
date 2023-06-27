@@ -6,6 +6,7 @@ import { Inter } from "@next/font/google";
 import Select from "./Select";
 import { OptionsValues } from "@/types/form";
 import Features from "./Features";
+import useFetchGenres from "@/hooks/useFetchGenres";
 
 type Props = {
   legendText: string;
@@ -18,19 +19,28 @@ const inter = Inter({ subsets: ["latin"] });
 const options = "Options List";
 
 const Fieldset = ({ legendText, optionsList, component }: Props) => {
+  const { genres, isLoading, error } = useFetchGenres();
+
   // TODO 26/6 -> refactor Business Logic
   const isComponent = (componentType: string) => component === componentType;
 
-  const selectComponent = isComponent("Select") && (
-    <Select optionsList={optionsList} isCreatable={true} />
+  const selectComponent = isComponent("Select") && genres && (
+    <Select optionsList={genres} isCreatable={true} />
   );
   const featuresComponent = isComponent("Features") && <Features />;
 
   return (
     <fieldset className={styles.fieldsets}>
       <legend className={inter.className}>{legendText}</legend>
+      {/* {isLoading && <span>Loading...</span>} */}
       {selectComponent}
       {featuresComponent}
+      {/* {genres && (
+        <>
+          {selectComponent}
+          {featuresComponent}
+        </>
+      )} */}
     </fieldset>
   );
 };

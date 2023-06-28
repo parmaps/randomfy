@@ -15,16 +15,15 @@ type Props = {
 };
 const inter = Inter({ subsets: ["latin"] });
 
-// Params
-const options = "Options List";
-
 const Fieldset = ({ legendText, optionsList, component }: Props) => {
   const { genres, isLoading, error } = useFetchGenres();
 
-  // TODO 26/6 -> refactor Business Logic
   const isComponent = (componentType: string) => component === componentType;
 
-  const selectComponent = isComponent("Select") && genres && (
+  const artistsComponent = isComponent("SelectArtists") && (
+    <Select optionsList={optionsList} isCreatable={true} />
+  );
+  const genresComponent = isComponent("SelectGenres") && genres && (
     <Select optionsList={genres} isCreatable={true} />
   );
   const featuresComponent = isComponent("Features") && <Features />;
@@ -33,7 +32,8 @@ const Fieldset = ({ legendText, optionsList, component }: Props) => {
     <fieldset className={styles.fieldsets}>
       <legend className={inter.className}>{legendText}</legend>
       {/* {isLoading && <span>Loading...</span>} */}
-      {selectComponent}
+      {artistsComponent}
+      {genresComponent}
       {featuresComponent}
       {/* {genres && (
         <>

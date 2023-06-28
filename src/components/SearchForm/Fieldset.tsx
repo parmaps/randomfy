@@ -1,5 +1,3 @@
-// TODO 22/6 -> refactor <fieldset></fieldset> de SearchForm aca para parametrizar
-
 import React from "react";
 import styles from "../../styles/Fieldset.module.scss";
 import { Inter } from "@next/font/google";

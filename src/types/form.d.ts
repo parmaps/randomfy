@@ -13,7 +13,9 @@ export type Body = {
 };
 
 export type FormValues = {
-  artist: string;
+  artists: string[];
+  genres: string[];
+  features: string[];
 };
 
 export interface OptionsValues {

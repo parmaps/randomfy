@@ -13,7 +13,7 @@ type Props = {
 };
 
 const SearchRow = ({ register, errors, field, placeholder }: Props) => {
-  // console.log(errors);
+  
   return (
     <>
       <input

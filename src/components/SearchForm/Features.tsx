@@ -19,7 +19,7 @@ const Features = (props: Props) => {
         index={index}
         len={arr.length}
       />
-    ));
+    ))
   };
 
   const featureItem = mapFeatureItem();

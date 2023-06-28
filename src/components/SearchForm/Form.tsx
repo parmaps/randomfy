@@ -9,18 +9,19 @@ import {
   OPTIONS_GENRES,
 } from "./OptionsData";
 import Fieldset from "./Fieldset";
+import SearchRow from "./SearchRow";
 
 const inter = Inter({ subsets: ["latin"] });
 type Props = {};
 
 const Form = (props: Props) => {
   const {
+    control,
     handleSubmit,
-    register,
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.warn(data);
 
   return (
     <form
@@ -30,18 +31,27 @@ const Form = (props: Props) => {
         legendText="Artists"
         optionsList={OPTIONS_ARTISTS}
         component="SelectArtists"
+        control={control}
+        element={"artists"}
+        errors={errors}
       />
-
+     
       <Fieldset
         legendText="Genres"
         optionsList={OPTIONS_GENRES}
         component="SelectGenres"
+        control={control}
+        element={"genres"}
+        errors={errors}
       />
 
       <Fieldset
         legendText="Features"
         optionsList={OPTIONS_FEATURES}
         component="Features"
+        control={control}
+        element={"features"}
+        errors={errors}
       />
 
       <input

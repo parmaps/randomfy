@@ -1,6 +1,11 @@
 import React from "react";
 import styles from "../../styles/Feature.module.scss";
-import { FeatureOptions, FormValues, OptionsValues } from "@/types/form";
+import {
+  FeatureOptions,
+  FeatureOptions2,
+  FormValues,
+  OptionsValues,
+} from "@/types/form";
 import { Control, FieldPath, UseFormRegister } from "react-hook-form";
 
 type Props = {
@@ -18,16 +23,8 @@ const FeatureItem = ({ feature, index, len, register, element }: Props) => {
   };
   const lastItem = isLastItem(index, len);
 
-  // console.log("feature value: " + feature.value);
-  // console.log("feature index: " + index);
-
-  // const test: FeatureOptions = { popularity_min: 0, popularity_max: 100 };
-  const indexString = index.toString();
-  const dinamic_param = `features.${indexString}`;
-  // console.log("dinamic_param", dinamic_param);
-  const dinamic_param2 = "features.1";
-  // console.log("dinamic param 2", dinamic_param2);
-  const feature_param = "features.popularity_min";
+  const feature_min = `features.${feature.value}_min`;
+  const feature_max = `features.${feature.value}_max`;
 
   return (
     <>
@@ -36,17 +33,17 @@ const FeatureItem = ({ feature, index, len, register, element }: Props) => {
           {feature.label}
         </label>
         <input
-          {...register!(`${feature.value}_min`)}
+          {...register!(feature_min as keyof FormValues)}
           type="number"
+          defaultValue="0"
           id={`${feature.value}-min`}
-          placeholder="0"
-          min="0"
-          max="100"></input>
+          min={0}
+          max={100}></input>
         <input
-          {...register!(`${feature.value}_max`)}
+          {...register!(feature_max as keyof FormValues)}
           type="number"
+          defaultValue="100"
           id={`${feature.value}-max`}
-          placeholder="100"
           min="0"
           max="100"></input>
       </li>

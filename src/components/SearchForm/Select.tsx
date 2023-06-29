@@ -1,29 +1,38 @@
 import React, { useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
+import { MultiSelect, Option } from "react-multi-select-component";
 import styles from "../../styles/Select.module.scss";
-import { OptionsValues } from "@/types/form";
+import { FormValues, OptionsValues } from "@/types/form";
+import { Control, Controller, FieldPath } from "react-hook-form";
 
 type Props = {
-  optionsList: OptionsValues[],
-  isCreatable: boolean
+  optionsList: OptionsValues[];
+  isCreatable: boolean;
+  control: Control<FormValues>;
+  element: FieldPath<FormValues>;
 };
 
-
-const Select = ({optionsList, isCreatable}: Props) => {
- 
-  const [selected, setSelected] = useState([]);
+const Select = ({ optionsList, isCreatable, control, element }: Props) => {
   const [options, setOptions] = useState(optionsList);
 
   return (
     <div>
-      {/* <pre>{JSON.stringify(selected)}</pre> */}
-      <MultiSelect
-        className={styles.select}
-        options={options}
-        value={selected}
-        onChange={setSelected}
-        labelledBy={"Genres"}
-        isCreatable={isCreatable}
+      <Controller
+        control={control}
+        name={element}
+        rules={{ required: false }}
+        defaultValue={[]}
+        render={({ field }) => {
+          return (
+            <MultiSelect
+              className={styles.select}
+              options={options}
+              value={field.value as unknown as Option[]}
+              labelledBy={"Genres"}
+              onChange={field.onChange}
+              isCreatable={isCreatable}
+            />
+          );
+        }}
       />
     </div>
   );

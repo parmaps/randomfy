@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Genres } from "@/types/form";
 
 const useFetchGenres = () => {
-  const [genres, setGenres] = useState<Genres[] | null>(null);
+  const [genres, setGenres] = useState<Genres[] | []>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [error, setError] = useState<unknown>();
 

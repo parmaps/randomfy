@@ -13,7 +13,7 @@ type Props = {
 };
 
 const SearchRow = ({ register, errors, field, placeholder }: Props) => {
-  // console.log(errors);
+  
   return (
     <>
       <input
@@ -23,7 +23,7 @@ const SearchRow = ({ register, errors, field, placeholder }: Props) => {
       />
 
       {/* errors will return when field validation fails  */}
-      {/* TODO 14/6 agregar className    */}
+      {/* TODO 28/6 ver si uso    */}
       {/* {errors[field] && <span className={`${styles.error} ${inter.className}`}>Required Field</span>} */}
     </>
   );

@@ -1,31 +1,49 @@
-// TODO 22/6 -> refactor <fieldset></fieldset> de SearchForm aca para parametrizar
-
 import React from "react";
 import styles from "../../styles/Fieldset.module.scss";
 import { Inter } from "@next/font/google";
 import Select from "./Select";
-import { OptionsValues } from "@/types/form";
+import { FormValues, OptionsValues } from "@/types/form";
 import Features from "./Features";
 import useFetchGenres from "@/hooks/useFetchGenres";
+import { Control, FieldPath, UseFormRegister } from "react-hook-form";
 
 type Props = {
   legendText: string;
   optionsList: OptionsValues[];
   component: string;
+  control: Control<FormValues>;
+  element: FieldPath<FormValues>;
+  errors: {};
 };
 const inter = Inter({ subsets: ["latin"] });
 
-// Params
-const options = "Options List";
-
-const Fieldset = ({ legendText, optionsList, component }: Props) => {
+const Fieldset = ({
+  legendText,
+  optionsList,
+  component,
+  control,
+  element,
+  errors,
+}: Props) => {
   const { genres, isLoading, error } = useFetchGenres();
 
-  // TODO 26/6 -> refactor Business Logic
   const isComponent = (componentType: string) => component === componentType;
 
-  const selectComponent = isComponent("Select") && genres && (
-    <Select optionsList={genres} isCreatable={true} />
+  const artistsComponent = isComponent("SelectArtists") && (
+    <Select
+      optionsList={optionsList}
+      isCreatable={true}
+      control={control}
+      element={element}
+    />
+  );
+  const genresComponent = isComponent("SelectGenres") && genres && (
+    <Select
+      optionsList={genres}
+      isCreatable={true}
+      control={control}
+      element={element}
+    />
   );
   const featuresComponent = isComponent("Features") && <Features />;
 
@@ -33,7 +51,8 @@ const Fieldset = ({ legendText, optionsList, component }: Props) => {
     <fieldset className={styles.fieldsets}>
       <legend className={inter.className}>{legendText}</legend>
       {/* {isLoading && <span>Loading...</span>} */}
-      {selectComponent}
+      {artistsComponent}
+      {genresComponent}
       {featuresComponent}
       {/* {genres && (
         <>

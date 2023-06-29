@@ -22,6 +22,8 @@ const Form = (props: Props) => {
     formState: { errors },
   } = useForm<FormValues>();
 
+  // useForm<FormValues>({defaultValues: {features: {}}});
+
   const onSubmit: SubmitHandler<FormValues> = (data) => console.warn(data);
 
   return (
@@ -36,7 +38,7 @@ const Form = (props: Props) => {
         control={control}
         errors={errors}
       />
-     
+
       <Fieldset
         legendText="Genres"
         component="SelectGenres"

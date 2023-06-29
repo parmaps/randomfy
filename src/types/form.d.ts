@@ -1,3 +1,4 @@
+import { OPTIONS_FEATURES } from './../components/SearchForm/OptionsData';
 export type Response = {
   statusCode: number;
 };
@@ -13,10 +14,13 @@ export type Body = {
 };
 
 export type FormValues = {
-  artists: string[];
-  genres: string[];
-  features: string[];
+  artists: {}[];
+  genres: {}[];
+  features: FeatureOptions;
 };
+
+export type FeatureOptions<OPTIONS_FEATURES> = {
+}
 
 export interface OptionsValues {
   label: string;

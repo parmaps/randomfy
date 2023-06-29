@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import FeatureItem from "./Feature";
 import styles from "../../styles/Features.module.scss";
 import { OPTIONS_FEATURES } from "./OptionsData";
+import { Control, FieldPath, UseFormRegister } from "react-hook-form";
+import { FormValues } from "@/types/form";
 
-type Props = {};
+type Props = {
+  control: Control<FormValues>;
+  register?: UseFormRegister<FormValues>;
+  element: FieldPath<FormValues>;
+};
 
-const Features = (props: Props) => {
+const Features = ({ control, register, element }: Props) => {
   const [features, setFeatures] = useState(OPTIONS_FEATURES);
 
-  {
-    /* TODO 27/6 confirmar si esta ok refactor logic */
-  }
   const mapFeatureItem = () => {
     return features.map((feature, index, arr) => (
       <FeatureItem
@@ -18,8 +21,11 @@ const Features = (props: Props) => {
         feature={feature}
         index={index}
         len={arr.length}
+        control={control}
+        register={register}
+        element={element}
       />
-    ))
+    ));
   };
 
   const featureItem = mapFeatureItem();

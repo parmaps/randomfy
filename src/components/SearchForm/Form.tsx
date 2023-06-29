@@ -18,6 +18,7 @@ const Form = (props: Props) => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -29,28 +30,29 @@ const Form = (props: Props) => {
       className={`${styles.searchMenu} ${inter.className}`}>
       <Fieldset
         legendText="Artists"
-        optionsList={OPTIONS_ARTISTS}
         component="SelectArtists"
-        control={control}
         element={"artists"}
+        optionsList={OPTIONS_ARTISTS}
+        control={control}
         errors={errors}
       />
      
       <Fieldset
         legendText="Genres"
-        optionsList={OPTIONS_GENRES}
         component="SelectGenres"
-        control={control}
         element={"genres"}
+        optionsList={OPTIONS_GENRES}
+        control={control}
         errors={errors}
       />
 
       <Fieldset
         legendText="Features"
-        optionsList={OPTIONS_FEATURES}
         component="Features"
-        control={control}
         element={"features"}
+        optionsList={OPTIONS_FEATURES}
+        control={control}
+        register={register}
         errors={errors}
       />
 

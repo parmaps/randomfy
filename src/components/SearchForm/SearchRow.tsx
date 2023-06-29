@@ -1,5 +1,5 @@
 import React from "react";
-import { UseFormRegister } from "react-hook-form";
+import { FieldPath, UseFormRegister } from "react-hook-form";
 import { Inter } from "@next/font/google";
 import styles from "../../styles/Form.module.scss";
 import { FormValues } from "@/types/form";
@@ -8,17 +8,16 @@ const inter = Inter({ subsets: ["latin"] });
 type Props = {
   register: UseFormRegister<FormValues>;
   errors: any;
-  field: any;
+  element: FieldPath<FormValues>;
   placeholder: string;
 };
 
-const SearchRow = ({ register, errors, field, placeholder }: Props) => {
-  
+const SearchRow = ({ register, errors, element, placeholder }: Props) => {
   return (
     <>
       <input
         className={`${styles.fieldBtn} ${inter.className}`}
-        {...register(field, { required: true })}
+        {...register(element, { required: true })}
         placeholder={placeholder}
       />
 

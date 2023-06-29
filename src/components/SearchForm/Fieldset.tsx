@@ -12,6 +12,7 @@ type Props = {
   optionsList: OptionsValues[];
   component: string;
   control: Control<FormValues>;
+  register?: UseFormRegister<FormValues>;
   element: FieldPath<FormValues>;
   errors: {};
 };
@@ -22,6 +23,7 @@ const Fieldset = ({
   optionsList,
   component,
   control,
+  register,
   element,
   errors,
 }: Props) => {
@@ -45,7 +47,9 @@ const Fieldset = ({
       element={element}
     />
   );
-  const featuresComponent = isComponent("Features") && <Features />;
+  const featuresComponent = isComponent("Features") && (
+    <Features control={control} element={element} register={register} />
+  );
 
   return (
     <fieldset className={styles.fieldsets}>

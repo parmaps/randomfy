@@ -6,6 +6,7 @@ import { FormValues, OptionsValues } from "@/types/form";
 import Features from "./Features";
 import useFetchGenres from "@/hooks/useFetchGenres";
 import { Control, FieldPath, UseFormRegister } from "react-hook-form";
+import { OPTIONS_GENRES } from "./OptionsData";
 
 type Props = {
   legendText: string;
@@ -27,7 +28,9 @@ const Fieldset = ({
   element,
   errors,
 }: Props) => {
-  const { genres, isLoading, error } = useFetchGenres();
+  // TODO 29/6 cambiado para evitar gatillar pedidos a la API de Spotify
+  // const { genres, isLoading, error } = useFetchGenres();
+  const genres = OPTIONS_GENRES
 
   const isComponent = (componentType: string) => component === componentType;
 

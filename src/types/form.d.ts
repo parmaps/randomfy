@@ -16,11 +16,23 @@ export type Body = {
 export type FormValues = {
   artists: {}[];
   genres: {}[];
-  features: FeatureOptions;
+  features: FeatureOptions2;
 };
 
-export type FeatureOptions<OPTIONS_FEATURES> = {
+export type FeatureOptions<T> = {  
+
 }
+
+export type FeatureOptions2 = {
+  popularity_min: number;  
+  energy_min: number;
+  danceability_min: number; 
+  instrumentalness_min: number;
+  tempo_min: number;
+  valence_min: number;
+}
+
+
 
 export interface OptionsValues {
   label: string;

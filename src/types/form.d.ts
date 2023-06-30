@@ -1,4 +1,9 @@
-import { OPTIONS_FEATURES } from './../components/SearchForm/OptionsData';
+import { FieldPath, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
+import { OPTIONS_FEATURES } from "./../components/SearchForm/OptionsData";
+export type SharedData = {
+  registerState: (name: FieldPath<FormValues>) => UseFormRegisterReturn<T>;
+};
+
 export type Response = {
   statusCode: number;
 };
@@ -19,20 +24,16 @@ export type FormValues = {
   features: FeatureOptions2;
 };
 
-export type FeatureOptions<T> = {  
-
-}
+export type FeatureOptions<T> = {};
 
 export type FeatureOptions2 = {
-  popularity_min: number;  
+  popularity_min: number;
   energy_min: number;
-  danceability_min: number; 
+  danceability_min: number;
   instrumentalness_min: number;
   tempo_min: number;
   valence_min: number;
-}
-
-
+};
 
 export interface OptionsValues {
   label: string;

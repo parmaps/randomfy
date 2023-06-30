@@ -3,7 +3,8 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.scss";
 import Logo from "@/components/Logo/Logo";
 import Brand from "@/components/Logo/Brand";
-import SearchForm from "@/components/SearchForm/Form";
+import Form from "@/components/SearchForm/Form";
+import FormContext from "@/store/form-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,7 @@ export default function Home() {
             <Brand />
           </div>
         </div>
-        <SearchForm></SearchForm>
+        <Form/>
       </main>
     </>
   );

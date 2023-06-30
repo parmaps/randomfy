@@ -1,11 +1,9 @@
-import { FormValues, SharedData } from "@/types/form";
 import React from "react";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { SharedData } from "@/types/form";
 
 export interface FormContextType {
   sharedData: SharedData;
 }
-
 
 const FormContext = React.createContext<FormContextType | undefined>(undefined);
 

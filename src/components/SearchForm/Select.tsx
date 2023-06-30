@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MultiSelect, Option } from "react-multi-select-component";
 import styles from "../../styles/Select.module.scss";
 import { FormValues, OptionsValues } from "@/types/form";
-import { Control, Controller, FieldPath } from "react-hook-form";
+import { Control, Controller, FieldPath, FormState } from "react-hook-form";
+import FormContext, { FormContextType } from "@/store/form-context";
 
 type Props = {
   optionsList: OptionsValues[];
   isCreatable: boolean;
-  control: Control<FormValues>;
   element: FieldPath<FormValues>;
+  control: Control<FormValues>;
 };
 
-const Select = ({ optionsList, isCreatable, control, element }: Props) => {
+const Select = ({ optionsList, isCreatable, element, control }: Props) => {
   const [options, setOptions] = useState(optionsList);
+
+  const formCtx: FormContextType | undefined = useContext(FormContext);
+  if (!formCtx) {
+    // TODO 30/6 ver como manejar; podria armar una funcion para esto (check formCtx)
+    // Handle the case when the context value is undefined
+    return null; // or return a loading state or fallback component
+  }
+
+  const { sharedData } = formCtx;
 
   return (
     <div>
       <Controller
-        control={control}
         name={element}
+        control={sharedData.controlState}
         rules={{ required: false }}
         defaultValue={[]}
         render={({ field }) => {

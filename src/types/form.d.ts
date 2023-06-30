@@ -1,7 +1,14 @@
-import { FieldPath, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
+import {
+  Control,
+  FieldPath,
+  UseFormRegister,
+  UseFormRegisterReturn,
+} from "react-hook-form";
 import { OPTIONS_FEATURES } from "./../components/SearchForm/OptionsData";
+
 export type SharedData = {
   registerState: (name: FieldPath<FormValues>) => UseFormRegisterReturn<T>;
+  controlState: Control<FormValues>;
 };
 
 export type Response = {

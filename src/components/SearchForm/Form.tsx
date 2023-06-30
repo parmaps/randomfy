@@ -9,7 +9,6 @@ import {
   OPTIONS_GENRES,
 } from "./OptionsData";
 import Fieldset from "./Fieldset";
-import SearchRow from "./SearchRow";
 import FormContext from "@/store/form-context";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,21 +22,15 @@ const Form = (props: Props) => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  // console.log(register)
-
-  // useForm<FormValues>({defaultValues: {features: {}}});
-
   const onSubmit: SubmitHandler<FormValues> = (data) => console.warn(data);
 
-  // const formState = {{ register }};
-  // const formState.registerState = register
+  const sharedData: SharedData = {
+    registerState: register,
+    controlState: control,
+  };
 
-
-  // const formState: FormState = {registerState: register}
-  const sharedData: SharedData = {registerState: register}
- 
   return (
-    <FormContext.Provider value={{ sharedData}}>
+    <FormContext.Provider value={{ sharedData }}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={`${styles.searchMenu} ${inter.className}`}>

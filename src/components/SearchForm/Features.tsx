@@ -17,12 +17,11 @@ const Features = ({ element, control, register }: Props) => {
 
   const formCtx: FormContextType | undefined = useContext(FormContext);
   if (!formCtx) {
+    // TODO 30/6 ver como manejar; podria armar una funcion para esto (check formCtx)
     // Handle the case when the context value is undefined
     return null; // or return a loading state or fallback component
   }
-  console.log(formCtx);
   const { sharedData } = formCtx;
-
 
   const mapFeatureItem = () => {
     return features.map((feature, index, arr) => (
@@ -33,7 +32,6 @@ const Features = ({ element, control, register }: Props) => {
         len={arr.length}
         element={element}
         control={control}
-        // register={register}
         register={sharedData.registerState}
       />
     ));

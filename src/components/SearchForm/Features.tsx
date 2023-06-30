@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FeatureItem from "./Feature";
 import styles from "../../styles/Features.module.scss";
 import { OPTIONS_FEATURES } from "./OptionsData";
 import { Control, FieldPath, UseFormRegister } from "react-hook-form";
 import { FormValues } from "@/types/form";
+import FormContext, { FormContextType } from "@/store/form-context";
 
 type Props = {
+  element: FieldPath<FormValues>;
   control: Control<FormValues>;
   register?: UseFormRegister<FormValues>;
-  element: FieldPath<FormValues>;
 };
 
-const Features = ({ control, register, element }: Props) => {
+const Features = ({ element, control, register }: Props) => {
   const [features, setFeatures] = useState(OPTIONS_FEATURES);
+
+  const formCtx: FormContextType | undefined = useContext(FormContext);
+  if (!formCtx) {
+    // Handle the case when the context value is undefined
+    return null; // or return a loading state or fallback component
+  }
+  console.log(formCtx);
+  const { sharedData } = formCtx;
+
 
   const mapFeatureItem = () => {
     return features.map((feature, index, arr) => (
@@ -21,9 +31,10 @@ const Features = ({ control, register, element }: Props) => {
         feature={feature}
         index={index}
         len={arr.length}
-        control={control}
-        register={register}
         element={element}
+        control={control}
+        // register={register}
+        register={sharedData.registerState}
       />
     ));
   };

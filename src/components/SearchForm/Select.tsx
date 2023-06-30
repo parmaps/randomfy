@@ -7,18 +7,18 @@ import { Control, Controller, FieldPath } from "react-hook-form";
 type Props = {
   optionsList: OptionsValues[];
   isCreatable: boolean;
-  control: Control<FormValues>;
   element: FieldPath<FormValues>;
+  control: Control<FormValues>;
 };
 
-const Select = ({ optionsList, isCreatable, control, element }: Props) => {
+const Select = ({ optionsList, isCreatable, element, control }: Props) => {
   const [options, setOptions] = useState(optionsList);
 
   return (
     <div>
       <Controller
-        control={control}
         name={element}
+        control={control}
         rules={{ required: false }}
         defaultValue={[]}
         render={({ field }) => {

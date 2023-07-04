@@ -27,7 +27,6 @@ const Form = (props: Props) => {
   const sharedData: SharedData = {
     registerState: register,
     controlState: control
-
   };
 
   return (

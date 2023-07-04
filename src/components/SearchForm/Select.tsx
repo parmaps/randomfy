@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { MultiSelect, Option } from "react-multi-select-component";
 import styles from "../../styles/Select.module.scss";
 import { FormValues, OptionsValues } from "@/types/form";
-import { Control, Controller, FieldPath, FormState } from "react-hook-form";
+import { Controller, FieldPath, FormState } from "react-hook-form";
 import FormContext, { FormContextType } from "@/store/form-context";
 
 type Props = {

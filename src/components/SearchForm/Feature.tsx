@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../../styles/Feature.module.scss";
 import {
   FeatureOptionsMaxString,
-  FeatureOptionsMin,
   FeatureOptionsMinString,
   FormValues,
   OptionsValues,
@@ -22,8 +21,6 @@ const FeatureItem = ({ feature, index, len, register }: Props) => {
     return item + 1 === length;
   };
   const lastItem = isLastItem(index, len);
-
-  // const feature_min = `features.${feature.value}_min`;
 
   const value_min = `${feature.value}_min`;
   const value_max = `${feature.value}_max`;

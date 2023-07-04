@@ -8,11 +8,10 @@ import FormContext, { FormContextType } from "@/store/form-context";
 
 type Props = {
   element: FieldPath<FormValues>;
-  control: Control<FormValues>;
   register?: UseFormRegister<FormValues>;
 };
 
-const Features = ({ element, control, register }: Props) => {
+const Features = ({ element }: Props) => {
   const [features, setFeatures] = useState(OPTIONS_FEATURES);
 
   const formCtx: FormContextType | undefined = useContext(FormContext);
@@ -31,7 +30,6 @@ const Features = ({ element, control, register }: Props) => {
         index={index}
         len={arr.length}
         element={element}
-        control={control}
         register={sharedData.registerState}
       />
     ));

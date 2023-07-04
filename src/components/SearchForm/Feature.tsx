@@ -14,7 +14,6 @@ type Props = {
   index: number;
   len: number;
   element: FieldPath<FormValues>;
-  control: Control<FormValues>;
   register?: UseFormRegister<FormValues>;
 };
 

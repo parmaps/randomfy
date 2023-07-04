@@ -26,7 +26,8 @@ const Form = (props: Props) => {
 
   const sharedData: SharedData = {
     registerState: register,
-    controlState: control,
+    controlState: control
+
   };
 
   return (
@@ -39,7 +40,6 @@ const Form = (props: Props) => {
           component="SelectArtists"
           element={"artists"}
           optionsList={OPTIONS_ARTISTS}
-          control={control}
           errors={errors}
         />
 
@@ -48,7 +48,6 @@ const Form = (props: Props) => {
           component="SelectGenres"
           element={"genres"}
           optionsList={OPTIONS_GENRES}
-          control={control}
           errors={errors}
         />
 
@@ -57,7 +56,6 @@ const Form = (props: Props) => {
           component="Features"
           element={"features"}
           optionsList={OPTIONS_FEATURES}
-          control={control}
           register={register}
           errors={errors}
         />

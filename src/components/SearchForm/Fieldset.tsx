@@ -12,7 +12,7 @@ type Props = {
   legendText: string;
   optionsList: OptionsValues[];
   component: string;
-  control: Control<FormValues>;
+  // control: Control<FormValues>;
   register?: UseFormRegister<FormValues>;
   element: FieldPath<FormValues>;
   errors: {};
@@ -24,7 +24,6 @@ const Fieldset = ({
   optionsList,
   component,
   element,
-  control,
   register,
   errors,
 }: Props) => {
@@ -39,7 +38,6 @@ const Fieldset = ({
       optionsList={optionsList}
       isCreatable={true}
       element={element}
-      control={control}
     />
   );
   const genresComponent = isComponent("SelectGenres") && genres && (
@@ -47,11 +45,10 @@ const Fieldset = ({
       optionsList={genres}
       isCreatable={true}
       element={element}
-      control={control}
     />
   );
   const featuresComponent = isComponent("Features") && (
-    <Features element={element} control={control} register={register} />
+    <Features element={element} register={register} />
   );
 
   return (

@@ -9,10 +9,9 @@ type Props = {
   optionsList: OptionsValues[];
   isCreatable: boolean;
   element: FieldPath<FormValues>;
-  control: Control<FormValues>;
 };
 
-const Select = ({ optionsList, isCreatable, element, control }: Props) => {
+const Select = ({ optionsList, isCreatable, element }: Props) => {
   const [options, setOptions] = useState(optionsList);
 
   const formCtx: FormContextType | undefined = useContext(FormContext);

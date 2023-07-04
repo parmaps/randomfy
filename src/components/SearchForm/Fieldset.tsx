@@ -4,15 +4,13 @@ import { Inter } from "@next/font/google";
 import Select from "./Select";
 import { FormValues, OptionsValues } from "@/types/form";
 import Features from "./Features";
-import useFetchGenres from "@/hooks/useFetchGenres";
-import { Control, FieldPath, UseFormRegister } from "react-hook-form";
+import { FieldPath, UseFormRegister } from "react-hook-form";
 import { OPTIONS_GENRES } from "./OptionsData";
 
 type Props = {
   legendText: string;
   optionsList: OptionsValues[];
   component: string;
-  // control: Control<FormValues>;
   register?: UseFormRegister<FormValues>;
   element: FieldPath<FormValues>;
   errors: {};
@@ -34,18 +32,10 @@ const Fieldset = ({
   const isComponent = (componentType: string) => component === componentType;
 
   const artistsComponent = isComponent("SelectArtists") && (
-    <Select
-      optionsList={optionsList}
-      isCreatable={true}
-      element={element}
-    />
+    <Select optionsList={optionsList} isCreatable={true} element={element} />
   );
   const genresComponent = isComponent("SelectGenres") && genres && (
-    <Select
-      optionsList={genres}
-      isCreatable={true}
-      element={element}
-    />
+    <Select optionsList={genres} isCreatable={true} element={element} />
   );
   const featuresComponent = isComponent("Features") && (
     <Features element={element} register={register} />

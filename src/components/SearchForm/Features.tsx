@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import FeatureItem from "./Feature";
 import styles from "../../styles/Features.module.scss";
 import { OPTIONS_FEATURES } from "./OptionsData";
-import { Control, FieldPath, UseFormRegister } from "react-hook-form";
+import { FieldPath, UseFormRegister } from "react-hook-form";
 import { FormValues } from "@/types/form";
 import FormContext, { FormContextType } from "@/store/form-context";
 

@@ -6,12 +6,9 @@ import { FieldPath, UseFormRegister } from "react-hook-form";
 import { FormValues } from "@/types/form";
 import FormContext, { FormContextType } from "@/store/form-context";
 
-type Props = {
-  element: FieldPath<FormValues>;
-  register?: UseFormRegister<FormValues>;
-};
+type Props = {};
 
-const Features = ({ element }: Props) => {
+const Features = ({}: Props) => {
   const [features, setFeatures] = useState(OPTIONS_FEATURES);
 
   const formCtx: FormContextType | undefined = useContext(FormContext);
@@ -29,7 +26,6 @@ const Features = ({ element }: Props) => {
         feature={feature}
         index={index}
         len={arr.length}
-        element={element}
         register={sharedData.registerState}
       />
     ));

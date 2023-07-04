@@ -37,9 +37,7 @@ const Fieldset = ({
   const genresComponent = isComponent("SelectGenres") && genres && (
     <Select optionsList={genres} isCreatable={true} element={element} />
   );
-  const featuresComponent = isComponent("Features") && (
-    <Features element={element} register={register} />
-  );
+  const featuresComponent = isComponent("Features") && <Features />;
 
   return (
     <fieldset className={styles.fieldsets}>

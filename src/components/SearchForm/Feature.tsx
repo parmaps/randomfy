@@ -12,7 +12,6 @@ type Props = {
   feature: OptionsValues;
   index: number;
   len: number;
-  element: FieldPath<FormValues>;
   register?: UseFormRegister<FormValues>;
 };
 

@@ -1,3 +1,5 @@
+import { FeatureOptions } from "@/types/form";
+import { FormValues } from "@/types/form";
 import {
   Control,
   FieldPath,
@@ -28,12 +30,10 @@ export type Body = {
 export type FormValues = {
   artists: {}[];
   genres: {}[];
-  features: FeatureOptions2;
+  features: FeatureOptionsMin | FeatureOptionsMax;
 };
 
-export type FeatureOptions<T> = {};
-
-export type FeatureOptions2 = {
+export type FeatureOptionsMin = {
   popularity_min: number;
   energy_min: number;
   danceability_min: number;
@@ -41,6 +41,26 @@ export type FeatureOptions2 = {
   tempo_min: number;
   valence_min: number;
 };
+
+export type FeatureOptionsMax = {
+  popularity_max: number;
+  energy_max: number;
+  danceability_max: number;
+  instrumentalness_max: number;
+  tempo_max: number;
+  valence_max: number;
+};
+
+export type FeatureOptionsMinKeys = keyof FeatureOptionsMin;
+export type FeatureOptionsMinString = `features.${Extract<
+  FeatureOptionsMinKeys,
+  string
+>}`;
+export type FeatureOptionsMaxKeys = keyof FeatureOptionsMax;
+export type FeatureOptionsMaxString = `features.${Extract<
+  FeatureOptionsMaxKeys,
+  string
+>}`;
 
 export interface OptionsValues {
   label: string;

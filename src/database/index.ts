@@ -13,3 +13,5 @@ const sequelize = new Sequelize("randomfy", "mapi", "Merengue1", {
     console.error("Unable to connect to the database:", error);
   }
 })();
+
+export default sequelize;

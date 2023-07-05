@@ -1,6 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/index");
-
 
 class User extends Model {}
 
@@ -13,9 +12,12 @@ User.init(
     },
     spotify_username: { type: DataTypes.STRING, allowNull: false },
     spotify_id: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, allowNull: false },
+    acess_token: { type: DataTypes.STRING },
+    refresh_token: { type: DataTypes.STRING },
   },
   {
-    sequelize
+    sequelize,
   }
 );
 

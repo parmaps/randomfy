@@ -14,4 +14,14 @@ const sequelize = new Sequelize("randomfy", "mapi", "Merengue1", {
   }
 })();
 
+(async () => {
+    try {
+      await sequelize.sync({ force: true });
+      console.log('All models were synchronized successfully.');
+    } catch (error) {
+      console.error('Error synchronizing models:', error);
+    }
+  })();
+  
+
 export default sequelize;

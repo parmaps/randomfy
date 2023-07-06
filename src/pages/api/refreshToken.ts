@@ -3,7 +3,7 @@ import { Body, Data, Response } from "@/types/form";
 import type { NextApiRequest, NextApiResponse } from "next";
 const request = require("request"); // "Request" library // FIXME 10/6 change to Fetch API
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {

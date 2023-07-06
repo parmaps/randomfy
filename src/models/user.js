@@ -1,6 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../database/index");
-
 
 class User extends Model {}
 
@@ -11,11 +10,22 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    spotify_username: { type: DataTypes.STRING, allowNull: false },
-    spotify_id: { type: DataTypes.STRING, allowNull: false },
+    spotifyUsername: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "spotify_username",
+    },
+    spotifyId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "spotify_id",
+    },
+    email: { type: DataTypes.STRING, allowNull: false },
+    accessToken: { type: DataTypes.STRING, field: "access_token" },
+    refreshToken: { type: DataTypes.STRING, field: "refresh_token" },
   },
   {
-    sequelize
+    sequelize,
   }
 );
 

@@ -1,7 +1,7 @@
-import User from "@/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
+import User from "@/models/user";
 
-export default async function handler(
+export default async function createUser(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

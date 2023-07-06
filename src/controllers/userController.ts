@@ -6,8 +6,9 @@ export default async function createUser(
   res: NextApiResponse
 ) {
   if (req.method !== "POST") {
+    console.log("Creating user...");
     res.status(405).json({ error: "Method not allowed" });
-    return;
+    // return;
   }
 
   try {

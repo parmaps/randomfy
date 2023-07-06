@@ -10,11 +10,19 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    spotify_username: { type: DataTypes.STRING, allowNull: false },
-    spotify_id: { type: DataTypes.STRING, allowNull: false },
+    spotifyUsername: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "spotify_username",
+    },
+    spotifyId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "spotify_id",
+    },
     email: { type: DataTypes.STRING, allowNull: false },
-    acess_token: { type: DataTypes.STRING },
-    refresh_token: { type: DataTypes.STRING },
+    accessToken: { type: DataTypes.STRING, field: "access_token" },
+    refreshToken: { type: DataTypes.STRING, field: "refresh_token" },
   },
   {
     sequelize,

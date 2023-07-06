@@ -1,6 +1,8 @@
 const User = require("./user.js");
 const Genre = require("./genre.js");
 const Feature = require("./feature.js");
+const Search = require("./search.js");
+const Playlist = require("./playlist.js");
 const sequelize = require("../database/index");
 
 (async () => {

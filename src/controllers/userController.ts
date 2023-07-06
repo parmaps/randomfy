@@ -1,23 +1,22 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/models/user";
 
-export default async function createUser(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function createUser(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
-    console.log("Creating user...");
     res.status(405).json({ error: "Method not allowed" });
-    // return;
+    return;
   }
 
   try {
-    const ruben = await User.create({
-      spotifyUsername: "el ruben",
-      spotifyId: "asc1as56",
-      email: "ruben@hotmail.com",
+    const { spotifyUsername, spotifyId, email } = req.body;
+
+    console.log("Creating user...");
+    const newUser = await User.create({
+      spotifyUsername,
+      spotifyId,
+      email,
     });
-    res.status(201).json(ruben);
+    res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });

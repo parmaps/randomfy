@@ -6,7 +6,7 @@ class Feature extends Model {}
 Feature.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    feature: { type: DataTypes.STRING, allowNull: false },
+    feature: { type: DataTypes.STRING, allowNull: false, unique: true},
     description: { type: DataTypes.TEXT },
   },
   { sequelize }

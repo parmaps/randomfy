@@ -10,10 +10,11 @@ Genre.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    genres: {
+    genre: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+      unique: true
+    },    
   },
   { sequelize }
 );

@@ -22,20 +22,17 @@ const Fieldset = ({
   optionsList,
   component,
   element,
-  register,
   errors,
 }: Props) => {
-  // TODO 29/6 cambiado para evitar gatillar pedidos a la API de Spotify
-  // const { genres, isLoading, error } = useFetchGenres();
-  const genres = OPTIONS_GENRES;
+  // const genres = OPTIONS_GENRES;
 
   const isComponent = (componentType: string) => component === componentType;
 
   const artistsComponent = isComponent("SelectArtists") && (
     <Select optionsList={optionsList} isCreatable={true} element={element} />
   );
-  const genresComponent = isComponent("SelectGenres") && genres && (
-    <Select optionsList={genres} isCreatable={true} element={element} />
+  const genresComponent = isComponent("SelectGenres") && optionsList && (
+    <Select optionsList={optionsList} isCreatable={true} element={element} />
   );
   const featuresComponent = isComponent("Features") && <Features />;
 

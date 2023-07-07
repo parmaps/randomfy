@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MultiSelect, Option } from "react-multi-select-component";
 import styles from "../../styles/Select.module.scss";
 import { FormValues, OptionsValues } from "@/types/form";
@@ -13,6 +13,10 @@ type Props = {
 
 const Select = ({ optionsList, isCreatable, element }: Props) => {
   const [options, setOptions] = useState(optionsList);
+
+  useEffect(() => {
+    if (element === "genres") setOptions(optionsList);
+  }, [element, optionsList]);
 
   const formCtx: FormContextType | undefined = useContext(FormContext);
   if (!formCtx) {

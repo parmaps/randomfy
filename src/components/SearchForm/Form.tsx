@@ -49,7 +49,7 @@ const Form = (props: Props) => {
           legendText="Genres"
           component="SelectGenres"
           element={"genres"}
-          optionsList={OPTIONS_GENRES}
+          optionsList={genres}
           errors={errors}
         />
 

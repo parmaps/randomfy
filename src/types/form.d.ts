@@ -68,3 +68,5 @@ export interface OptionsValues {
 }
 
 export interface Genres extends OptionsValues {}
+
+export type GenreObject = { id: number; genre: string; [key]: any };

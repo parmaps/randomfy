@@ -13,14 +13,18 @@ const useFetchGenresRandomfy = () => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
+        setIsLoading(true);
         console.log("Fetching genres...");
         const resp = await fetch(genresURL);
         const data = await resp.json();
         const mappedGenres = await mapGenresToOptionsValues(data);
-        console.log("mappedGenres", mappedGenres);
+        // console.log("mappedGenres", mappedGenres);
+        setGenres(mappedGenres);
         console.log("Done fetching genres.");
       } catch (error) {
         console.log("error:", error);
+        setError(error);
+        setIsLoading(false);
       }
     };
 

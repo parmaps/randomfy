@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Genres } from "@/types/form";
-
+import { mapGenresToOptionsValues } from "@/utils/strings";
 
 const useFetchGenresRandomfy = () => {
   const [genres, setGenres] = useState<Genres[] | []>([]);
@@ -15,9 +15,9 @@ const useFetchGenresRandomfy = () => {
       try {
         console.log("Fetching genres...");
         const resp = await fetch(genresURL);
-        console.log("resp:", resp);
         const data = await resp.json();
-        console.log("data:", data);
+        const mappedGenres = await mapGenresToOptionsValues(data);
+        console.log("mappedGenres", mappedGenres);
         console.log("Done fetching genres.");
       } catch (error) {
         console.log("error:", error);

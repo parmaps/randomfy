@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Genres } from "@/types/form";
 
-type Props = {};
 
-const useFetchGenresRandomfy = (props: Props) => {
+const useFetchGenresRandomfy = () => {
   const [genres, setGenres] = useState<Genres[] | []>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [error, setError] = useState<unknown>();

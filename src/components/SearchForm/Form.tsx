@@ -10,6 +10,7 @@ import {
 } from "./OptionsData";
 import Fieldset from "./Fieldset";
 import FormContext from "@/store/form-context";
+import useFetchGenresRandomfy from "@/hooks/useFetchGenresRandomfy";
 
 const inter = Inter({ subsets: ["latin"] });
 type Props = {};
@@ -28,6 +29,8 @@ const Form = (props: Props) => {
     registerState: register,
     controlState: control,
   };
+
+  const { genres, isLoading, error } = useFetchGenresRandomfy();
 
   return (
     <FormContext.Provider value={{ sharedData }}>

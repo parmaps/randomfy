@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Genres } from "@/types/form";
-import { mapGenresToOptionsValues } from "@/utils/strings";
+import { mapGenresToOptionsValues } from "../utils/strings";
 
 const useFetchGenresRandomfy = () => {
+  const firstUpdate = useRef(true);
   const [genres, setGenres] = useState<Genres[] | []>([]);
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>();
 
   // TODO 7/7 change when in prod to production URL
@@ -24,11 +25,14 @@ const useFetchGenresRandomfy = () => {
       } catch (error) {
         console.log("error:", error);
         setError(error);
+      } finally {
         setIsLoading(false);
       }
     };
 
-    fetchGenres();
+    // Using firstUpdate with useRef(true) to make sure it only makes a call on it’s first render
+    if (firstUpdate.current) fetchGenres();
+    firstUpdate.current = false;
   }, []);
 
   return { genres, isLoading, error };

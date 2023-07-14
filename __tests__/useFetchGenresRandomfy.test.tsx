@@ -47,7 +47,7 @@ describe("Fetch Randomfy Genres Hook", () => {
       json: jest.fn().mockResolvedValue(mockGenresSpotify),
     });
   });
-  
+
   test("should trigger fetch only once", async () => {
     const fetchMock = global.fetch;
     renderHook(() => useFetchGenres());
@@ -91,18 +91,22 @@ describe("Fetch Randomfy Genres Hook", () => {
     global.fetch = jest.fn().mockRejectedValueOnce(new Error("Fetch error"));
     const { result } = renderHook(() => useFetchGenres());
 
-    await act(async () => {
-      expect(result.current.error).toBeUndefined();
-    });
+    expect(result.current.error).toBeUndefined();
 
     await waitFor(() => {
       expect(result.current.error).toEqual(new Error("Fetch error"));
     });
   });
 
-  //   test("isLoading state is set to true when fetching data", () => {});
+  test("should set isLoading state during data fetching", async () => {
+    const { result } = renderHook(() => useFetchGenres());
 
-  //   test("isLoading state is set to false when data is fetched", () => {});
+    expect(result.current.isLoading).toBe(true);
+
+    await waitFor(async () => {
+      expect(result.current.isLoading).toBe(false);
+    });
+  });
 
   // FIXME 12/7 -> corregir para que trabaje acorde a la logica del useRef firstUpdate
   //   test("should fetch data only on first render", async () => {

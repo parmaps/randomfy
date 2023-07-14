@@ -3,14 +3,10 @@ import { renderHook, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import useFetchGenres from "../src/hooks/useFetchGenresRandomfy";
 import { act } from "@testing-library/react";
+import { Genres } from "@/types/form";
 
 describe("Fetch Randomfy Genres Hook", () => {
-  beforeEach(() => {
-    global.fetch = jest.fn().mockResolvedValue({
-      json: jest.fn().mockResolvedValue([]),
-    });
-  });
-  const mockData = [
+  const mockGenresSpotify = [
     {
       id: 6,
       genre: "acoustic",
@@ -23,7 +19,45 @@ describe("Fetch Randomfy Genres Hook", () => {
       createdAt: "2023-07-07T15:47:48.939Z",
       updatedAt: "2023-07-07T15:47:48.939Z",
     },
+    {
+      createdAt: "2023-07-07T15:47:48.940Z",
+      genre: "disco",
+      id: 32,
+      updatedAt: "2023-07-07T15:47:48.939Z",
+    },
   ];
+
+  const mockGenresMapped: Genres[] = [
+    {
+      label: "Acoustic",
+      value: "acoustic",
+    },
+    {
+      label: "Afrobeat",
+      value: "afrobeat",
+    },
+    {
+      label: "Disco",
+      value: "disco",
+    },
+  ];
+
+  beforeEach(() => {
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mockGenresSpotify),
+    });
+  });
+  
+  test("should trigger fetch only once", async () => {
+    const fetchMock = global.fetch;
+    renderHook(() => useFetchGenres());
+    // Wait for the initial render to complete
+    await act(async () => {
+      //   console.log(fetchMock.mock.calls);
+    });
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
 
   test("should render genres as empty array initially ", async () => {
     const { result } = renderHook(() => useFetchGenres());
@@ -35,31 +69,40 @@ describe("Fetch Randomfy Genres Hook", () => {
     });
   });
 
-  test("should trigger fetch only once", async () => {
-    const fetchMock = global.fetch;
-    renderHook(() => useFetchGenres());
-    // Wait for the initial render to complete
-    await act(async () => {
-      console.log(fetchMock.mock.calls);
-    });
+  test("should return genres of type Genres[]", async () => {
+    const { result } = renderHook(() => useFetchGenres());
 
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    // Assuming `Genres` is a custom type or class
+    await waitFor(() => {
+      expect(result.current.genres).toMatchObject(mockGenresMapped);
+    });
   });
 
-  //   test("should fetch genres successfully", async () => {
-  //     const { result, waitForNextUpdate } = renderHook(() => useFetchGenres());
-  //     // console.log(waitForNextUpdate);
-  //   });
+  test("should fetch genres successfully", async () => {
+    const { result } = renderHook(() => useFetchGenres());
 
-  //   test("should handle fetch errors", async () => {});
+    await waitFor(() => {
+      const { genres } = result.current;
+      expect(genres).toEqual(mockGenresMapped);
+    });
+  });
+
+  test("should handle fetch errors", async () => {
+    global.fetch = jest.fn().mockRejectedValueOnce(new Error("Fetch error"));
+    const { result } = renderHook(() => useFetchGenres());
+
+    await act(async () => {
+      expect(result.current.error).toBeUndefined();
+    });
+
+    await waitFor(() => {
+      expect(result.current.error).toEqual(new Error("Fetch error"));
+    });
+  });
 
   //   test("isLoading state is set to true when fetching data", () => {});
 
   //   test("isLoading state is set to false when data is fetched", () => {});
-
-  //   test("genres state once set is of type Genres[]", () => {});
-
-  
 
   // FIXME 12/7 -> corregir para que trabaje acorde a la logica del useRef firstUpdate
   //   test("should fetch data only on first render", async () => {

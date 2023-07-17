@@ -1,4 +1,4 @@
-import Genre from "@/models/genre";
+import Genre from "@/models/Genre";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function getGenres(req: NextApiRequest, res: NextApiResponse) {

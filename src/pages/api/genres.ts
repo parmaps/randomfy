@@ -1,11 +1,34 @@
-import { createBulkGenres, getGenres } from "@/controllers/genreController";
 import { NextApiRequest, NextApiResponse } from "next";
+import { createBulkGenres, getGenres } from "@/controllers/genreController";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") await getGenres(req, res);
-  else if (req.method === "POST") await createBulkGenres(req, res);
-  else res.status(405).json({ error: "Method not allowed" });
+  const { method } = req;
+
+  switch (method) {
+    case "GET":
+      try {
+        await getGenres(req, res);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
+      break;
+
+    case "POST":
+      try {
+        await createBulkGenres(req, res);
+        res.status(201).json({ message: "Genres created successfully" });
+      } catch (error) {
+        console.error("Error creating genres:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
+      break;
+
+    default:
+      res.status(405).json({ error: "Method not allowed" });
+      break;
+  }
 }

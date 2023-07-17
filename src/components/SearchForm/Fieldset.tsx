@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/Fieldset.module.scss";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import Select from "./Select";
 import { FormValues, OptionsValues } from "@/types/form";
 import Features from "./Features";

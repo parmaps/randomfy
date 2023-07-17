@@ -1,6 +1,6 @@
 import React from "react";
 import { FieldPath, UseFormRegister } from "react-hook-form";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import styles from "../../styles/Form.module.scss";
 import { FormValues } from "@/types/form";
 

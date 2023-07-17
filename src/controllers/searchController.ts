@@ -1,4 +1,5 @@
 import Search from "@/models/Search";
+import { getArtistIdByName } from "@/services/spotify/getArtistIdByName";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function createSearch(req: NextApiRequest, res: NextApiResponse) {
@@ -9,10 +10,11 @@ export async function createSearch(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     // TODO 17/7 Search artists (to get id)
+    const artistID = await getArtistIdByName(req, res);
+    console.log("Artist ID: ", artistID);
     // TODO 17/7 Search tracks (to get id)
     // TODO 17/7 Post search to Spotify (to get id) https://api.spotify.com/v1/recommendations?
 
-    
     // const {userId, searchData} = req.body;
     // TODO 17/7 -> userID deberia venir de getUserById o algo asi (buscar el mail actual logeado y devolver su id)
     // console.log("Creating search...");

@@ -1,5 +1,5 @@
 import React from "react";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import styles from "../../styles/Form.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormValues, SharedData } from "@/types/form";

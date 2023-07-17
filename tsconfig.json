@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/models/sync.js", "src/database/index.js", "src/models/user.js", "__tests__/sum.test.ts", "src/tests/Counter.jsx", "__tests__/counter.test.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/models/Sync.js", "src/database/index.js", "src/models/User.js", "__tests__/sum.test.ts", "src/tests/Counter.jsx", "__tests__/counter.test.jsx"],
   "exclude": ["node_modules"]
 }

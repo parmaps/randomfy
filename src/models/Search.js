@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const User = require("./user.js");
+const User = require("./User.js");
 const sequelize = require("../database/index");
 
 class Search extends Model {}

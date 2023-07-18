@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
 
 async function fetchArtistData(artistName: string, accessToken: string) {
   console.log(
@@ -23,8 +22,11 @@ async function fetchArtistData(artistName: string, accessToken: string) {
 
   // API Response Handling: If response status is not in the success range (200-299), throw new error returning its code
   if (!response.ok) {
+    const errorJson = await response.json();
+    const { error } = errorJson;
+
     throw new Error(
-      `Failed to fetch data from Spotify API. Response status: ${response.status}`
+      `Failed to fetch data from Spotify API: Status ${error.status} -> ${error.message}.`
     );
   }
 
@@ -36,26 +38,24 @@ async function fetchArtistData(artistName: string, accessToken: string) {
 }
 
 export async function getArtistIdByName(
-  req: NextApiRequest,
-  res: NextApiResponse
+  artistName: string,
+  accessToken: string
 ) {
-  const { artistName } = req.query;
-  if (!artistName || typeof artistName !== "string") {
-    return res
-      .status(400)
-      .json({ error: "Invalid or missing artistName parameter" });
-  }
-
-  const accessToken = "access-token";
-
   try {
-    const data = await fetchArtistData(artistName, accessToken);
-    console.log("response data: " + data);
-    return res.status(200).json(data);
+    const artistData = await fetchArtistData(artistName, accessToken);
+
+    console.log("response data: " + artistData);
+    const { artists } = artistData;
+    const artist = artists.items[0];
+
+    if (!artist) {
+      throw new Error("Artist not found");
+    }
+
+    // Returning the artist
+    return artist;
   } catch (error) {
-    console.error("Error fetching data from Spotify API:", error);
-    return res
-      .status(500)
-      .json({ error: "Failed to fetch data from Spotify API" });
+    console.error(error);
+    throw error;
   }
 }

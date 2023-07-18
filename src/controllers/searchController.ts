@@ -1,5 +1,6 @@
 import Search from "@/models/Search";
 import { getArtistIdByName } from "@/services/spotify/getArtistIdByName";
+import { getTrackIdByName } from "@/services/spotify/getTrackIdByName";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function createSearch(req: NextApiRequest, res: NextApiResponse) {
@@ -10,15 +11,17 @@ export async function createSearch(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     // TODO 17/7 Search artists (to get id)
-    const { artistName } = req.body;
+    const { artist, track } = req.body;
     const accessToken =
-      "BQAms2UIyXLA3ijTr1Ac8-8l5tV9MkcMA1u1-o1nn6xfHhrR1dwkXIcZCIWL2cvGTwQjmr_pMi0w1-MEsqxM_O1J9LArTZSoHd3Pc1oL7_OgXwTbKqVMY9R0joSs1ngbFn9ZMY83OnDI64avf9hUpxCbeascbjTWy_ETNRTDJUbPwWcVGR9UZEopRMN2zWXUnzlO1JwXg33nDPxMpcO1ZWOF2gF8YzqY-wQEnn3wZTzmnPWRBWTmIR0zF7DS_e5-922yimaaYHi2-g";
-    const artist = await getArtistIdByName(artistName, accessToken);
-    console.log("Artist Name: ", artist.name);
-    console.log("Artist ID: ", artist.id);
-    res.status(200).json({ artist: artist.name, id: artist.id });
+      "BQCefL_csEtfLN7nxO1EEes5juP7zCXIGl1Q4W9moRPcBNy-r4JTYdOfI1JK3B3BxHynVMQiawzfJSWW8uFSLrSqS3-YahnnnVZIVECsT33R8lkZKyikyEYaJqcDDkjFxPoWmg0KIfWzClWtXngzXcxvD3hywJ5xH_f676wRbe70dXdzjiaLIektro_y0v8fK4woC0xzKFUEjQ1RGrI4xJsvjwRUTfEet3SuQ9kuFs0bQJwQEx1oeyP50fHQmCyfi8DEoebnYMF8qw";
+    const artistType = "artist";
+    const artistData = await getArtistIdByName(artist, artistType, accessToken);
 
-    // TODO 17/7 Search tracks (to get id)
+    const trackType = "track";
+    const trackData = await getTrackIdByName(track, trackType, accessToken);
+
+    res.status(200).json({ artistData, trackData });
+
     // TODO 17/7 Post search to Spotify (to get id) https://api.spotify.com/v1/recommendations?
 
     // const {userId, searchData} = req.body;

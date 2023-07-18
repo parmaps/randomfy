@@ -11,9 +11,8 @@ export default async function handler(
     case "POST":
       try {
         await createSearch(req, res);
-        res.status(201).json({ message: "Search created successfully" });
       } catch (error) {
-        console.error("Error creating search:", error);
+        console.error("Error handling POST request:", error);
         res.status(500).json({ error: "Internal server error" });
       }
       break;

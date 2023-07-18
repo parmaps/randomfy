@@ -48,11 +48,11 @@ export default async function handler(
         const refresh_token: string = body.refresh_token;
         // WIP 10/6 change flow to DB and delete this
         // Generate fake access token to check refresh token flow
-        const fake_access_token = "1234";
+        // const fake_access_token = "1234";
 
         var options = {
           url: "https://api.spotify.com/v1/me",
-          headers: { Authorization: "Bearer " + fake_access_token },
+          headers: { Authorization: "Bearer " + access_token },
           json: true,
         };
 
@@ -61,17 +61,20 @@ export default async function handler(
           options,
           function (error: string, response: Response, body: Body) {
             console.log("request get ME body", body);
+
             // refresh access token if current is invalid
-            if (body.error.status === 401) {
+            if (body.error?.status === 401) {
               // redirect to /refresh_token
               res.redirect(
-                "/api/refresh_token?" +
+                "/api/refreshToken?" +
                   querystring.stringify({
                     access_token: access_token,
                     refresh_token: refresh_token,
                   })
               );
             }
+
+            else res.redirect("/");
           }
         );
       } else {

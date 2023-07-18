@@ -41,7 +41,8 @@ export default async function handler(
         console.log("new access token: " + access_token);
 
         var options = {
-          url: "https://api.spotify.com/v1/me/top/artists",
+          // url: "https://api.spotify.com/v1/me/top/artists",
+          url: "https://api.spotify.com/v1/me/",
           headers: { Authorization: "Bearer " + access_token },
           json: true,
         };

@@ -11,6 +11,7 @@ import {
 import Fieldset from "./Fieldset";
 import FormContext from "@/store/form-context";
 import useFetchGenresRandomfy from "@/hooks/useFetchGenresRandomfy";
+import { mapFormData, submitFormData } from "@/services/backend/submitFormData";
 
 const inter = Inter({ subsets: ["latin"] });
 type Props = {};
@@ -23,7 +24,11 @@ const Form = (props: Props) => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.warn(data);
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.warn(data);
+    const mappedFormData = await mapFormData(data);
+    await submitFormData(mappedFormData);
+  };
 
   const sharedData: SharedData = {
     registerState: register,

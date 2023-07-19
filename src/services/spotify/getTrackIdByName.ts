@@ -1,4 +1,4 @@
-import { fetchSpotifyData } from "@/utils/spotifyAPI";
+import { fetchSpotifySearchData } from "@/utils/spotifyAPI";
 
 export async function getTrackIdByName(
   track: string,
@@ -6,7 +6,7 @@ export async function getTrackIdByName(
   accessToken: string
 ) {
   try {
-    const trackData = await fetchSpotifyData(track, type, accessToken);
+    const trackData = await fetchSpotifySearchData(track, type, accessToken);
     const { tracks } = trackData;
     const foundTrack = tracks.items[0];
     if (!foundTrack) {

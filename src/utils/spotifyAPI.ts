@@ -37,17 +37,18 @@ export async function fetchSpotifySearchData(
 }
 
 export async function fetchSpotifyRecommendations(
-  recommendationParams: RecommendationParams
+  recommendationParams: RecommendationParams,
+  accessToken: string
 ) {
   console.log("recommendation params: ", recommendationParams);
 
   const spotifyURL = "https://api.spotify.com/v1/recommendations";
 
   const queryParams = new URLSearchParams({
-    seed_artists: recommendationParams.seedArtists,
-    seed_genres: recommendationParams.seedGenres,
-    seed_tracks: recommendationParams.seedTracks,
-    min_valence: recommendationParams.minValence.toString(),
+    seed_artists: recommendationParams.seed_artists,
+    seed_genres: recommendationParams.seed_genres,
+    // seed_tracks: recommendationParams.seed_tracks, // TODO 19/7 ver si lo agrego en V2.0
+    min_valence: recommendationParams.valence_min.toString(),
   });
 
   const fetchURL = `${spotifyURL}?${queryParams.toString()}`;
@@ -56,7 +57,7 @@ export async function fetchSpotifyRecommendations(
   const response = await fetch(fetchURL, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${recommendationParams.accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
 

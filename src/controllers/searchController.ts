@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export async function createSearch(
   req: NextApiRequest,
   res: NextApiResponse,
-  recommendationParams: RecommendationParams
+  formInputs: RecommendationParams
 ) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -27,9 +27,9 @@ export async function createSearch(
     const trackData = await getTrackIdByName(track, trackType, accessToken);
 
     // const seedArtists = artistData.artistId;
-    const recommendationData = await getRecommendations(recommendationParams);
+    const recommendations = await getRecommendations(formInputs, accessToken);
 
-    console.log("recommendation data (from controller): ", recommendationData);
+    console.log("recommendation data (from controller): ", recommendations);
 
     res.status(200).json({ artistData, trackData });
 

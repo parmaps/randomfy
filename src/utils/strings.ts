@@ -3,7 +3,6 @@ export const capitalizeWord = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-
 export const mapGenresToOptionsValues = async (
   genresObjectList: GenreObject[]
 ) => {
@@ -15,9 +14,9 @@ export const mapGenresToOptionsValues = async (
   );
 };
 
-export const mapOptionsValuesToStrings = async (
-  genresOptionsList: OptionsValues[]
-) => {
-  const genres = genresOptionsList.map((genreObject) => genreObject.value);
-  return genres.join(",");
+export const mapOptionsValuesToString = async (
+  optionsList: OptionsValues[]
+): Promise<string> => {
+  const values = optionsList.map((object) => object.value);
+  return values.join(",");
 };

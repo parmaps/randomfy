@@ -1,5 +1,6 @@
 import Search from "@/models/Search";
 import { getArtistIdByName } from "@/services/spotify/getArtistIdByName";
+import { getRecommendations } from "@/services/spotify/getRecommendations";
 import { getTrackIdByName } from "@/services/spotify/getTrackIdByName";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -10,15 +11,29 @@ export async function createSearch(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    // TODO 17/7 Search artists (to get id)
     const { artist, track } = req.body;
+    // TODO 17/7 armar funcion para pedir a DB
     const accessToken =
-      "BQCefL_csEtfLN7nxO1EEes5juP7zCXIGl1Q4W9moRPcBNy-r4JTYdOfI1JK3B3BxHynVMQiawzfJSWW8uFSLrSqS3-YahnnnVZIVECsT33R8lkZKyikyEYaJqcDDkjFxPoWmg0KIfWzClWtXngzXcxvD3hywJ5xH_f676wRbe70dXdzjiaLIektro_y0v8fK4woC0xzKFUEjQ1RGrI4xJsvjwRUTfEet3SuQ9kuFs0bQJwQEx1oeyP50fHQmCyfi8DEoebnYMF8qw";
+      "BQBWqtuhnxpJye_i36flOZXV24XcLBZHyycgZHROmUBV0Hmzzdb8YM1bQajQ2taM5tihkvRvnmTTLOKp4xb6-Ec8pf2mVMLr0ayAFIqLY_XxGzGg3esMPY1_1IO4eG8G_CzcJEje810sFaJ-30ylxxBrzWMxBmBZLor71PHEp0roqWAcSOgR-voDdGQHGNPjiVcr6G2vIUrduTJlI7XQLPtLoH8MKVuD1L0aRVcahbjCKDUaCBmikh3CNX6wj8DUgqUR6qMbZbA6Rg";
     const artistType = "artist";
     const artistData = await getArtistIdByName(artist, artistType, accessToken);
 
     const trackType = "track";
     const trackData = await getTrackIdByName(track, trackType, accessToken);
+
+    const seedArtists = artistData.artistId;
+    const seedGenres = "";
+    const seedTracks = "";
+    const minValence = 0.9;
+    const recommendationData = await getRecommendations(
+      seedArtists,
+      seedGenres,
+      seedTracks,
+      minValence,
+      accessToken
+    );
+
+    console.log("recommendation data: ", recommendationData);
 
     res.status(200).json({ artistData, trackData });
 

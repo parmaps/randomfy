@@ -1,4 +1,4 @@
-import { fetchSpotifyData } from "@/utils/spotifyAPI";
+import { fetchSpotifySearchData } from "@/utils/spotifyAPI";
 
 export async function getArtistIdByName(
   artist: string,
@@ -6,7 +6,7 @@ export async function getArtistIdByName(
   accessToken: string
 ) {
   try {
-    const artistData = await fetchSpotifyData(artist, type, accessToken);
+    const artistData = await fetchSpotifySearchData(artist, type, accessToken);
     const { artists } = artistData;
     const foundArtist = artists.items[0];
     if (!foundArtist) {

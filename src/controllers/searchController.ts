@@ -19,7 +19,7 @@ export async function createSearch(
     const { artist, track } = req.body;
     // TODO 17/7 armar funcion para pedir access token a DB
     const accessToken =
-      "BQChzj_wm-elMxN5aoeVo-8psvR9pbdSnBKniQOJNFxURhbASIleFUQzJ60IY_oa2zIQuq1YPlO_dHzGUCJgFJcbZAWJQvZG_FkVhB3Nm4j-kbbTgPkuV-SK-1oiRTi2JPNndJg_R2WWfB-QdoLdLAGP1ccj2076V7ua384lWNFk9QIvBeuNN2QWYfTIdqpDpSiK0ERfW6EXzGhtoO0s7IS6Sh5DbDh1Gnm7zqOldtHf7-uhCmwgTX6G3blDJeglF9B--Ej34DBO8g";
+      "BQBzXij4O8USJ-inXxxmS_gA_pjw5Zq7A6tkn7-vu4Ta-oKBCpGxdn7NISlqEKlVVE2ewJekny5rh-6pXLkQBGWZgQPCpsu4pxrvhgjnGXl2Wrjfyh9HZ1lzn-EyxYCFOohOXAhXYRgIH7rNWJT6Pj3i66pQQOAVkKxP7qS3LcNgsUXtOLW5aesj0Hq_bu9TPShKs_hvZXyJ-5byu2BO9kxiN3jFQCkVRUlrhdnWBInqcsEigtEE3gjjwpKDNpov2uiVg2S3VjMvQg";
     const artistType = "artist";
     const artistData = await getArtistIdByName(artist, artistType, accessToken);
 

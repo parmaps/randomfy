@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Genres } from "@/types/form";
+import { OptionsValues } from "@/types/form";
 import { mapGenresToOptionsValues } from "../utils/strings";
 
 const useFetchGenresRandomfy = () => {
   const firstUpdate = useRef(true);
-  const [genres, setGenres] = useState<Genres[] | []>([]);
+  const [genres, setGenres] = useState<OptionsValues[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>();
 

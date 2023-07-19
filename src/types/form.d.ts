@@ -28,8 +28,8 @@ export type Body = {
 };
 
 export type FormValues = {
-  artists: {}[];
-  genres: {}[];
+  artists: OptionsValues[];
+  genres: OptionsValues[];
   features: FeatureOptionsMin | FeatureOptionsMax;
 };
 
@@ -62,12 +62,7 @@ export type FeatureOptionsMaxString = `features.${Extract<
   string
 >}`;
 
-export interface OptionsValues {
-  label: string;
-  value: string;
-}
-
-export interface Genres extends OptionsValues {}
+export type OptionsValues = { label: string; value: string };
 
 export type GenreObject = { id: number; genre: string; [key]: any };
 
@@ -77,4 +72,4 @@ export type RecommendationParams = {
   seedGenres: string;
   seedTracks: string;
   minValence: string;
-}
+};

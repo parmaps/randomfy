@@ -70,3 +70,11 @@ export interface OptionsValues {
 export interface Genres extends OptionsValues {}
 
 export type GenreObject = { id: number; genre: string; [key]: any };
+
+export type RecommendationParams = {
+  accessToken: string;
+  seedArtists: string;
+  seedGenres: string;
+  seedTracks: string;
+  minValence: string;
+}

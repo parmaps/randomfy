@@ -1,16 +1,11 @@
+import { RecommendationParams } from "@/types/form";
+
 export async function fetchSpotifySearchData(
   searchParam: string,
   type: string,
   accessToken: string
 ) {
-  console.log(
-    "searchParam: ",
-    searchParam,
-    "type: ",
-    type,
-    "accessToken: ",
-    accessToken
-  );
+  console.log("searchParam: ", searchParam, "type: ", type);
 
   const spotifyURL = "https://api.spotify.com/v1/search";
 
@@ -42,34 +37,28 @@ export async function fetchSpotifySearchData(
 }
 
 export async function fetchSpotifyRecommendations(
-  seedArtists: string,
-  seedGenres: string,
-  seedTracks: string,
-  minValence: number,
-  accessToken: string
+  recommendationParams: RecommendationParams
 ) {
-  console.log("params: ", seedArtists, seedGenres, seedTracks);
+  console.log("recommendation params: ", recommendationParams);
 
   const spotifyURL = "https://api.spotify.com/v1/recommendations";
 
   const queryParams = new URLSearchParams({
-    seed_artists: seedArtists,
-    seed_genres: seedGenres,
-    seed_tracks: seedTracks,
-    min_valence: minValence.toString()
+    seed_artists: recommendationParams.seedArtists,
+    seed_genres: recommendationParams.seedGenres,
+    seed_tracks: recommendationParams.seedTracks,
+    min_valence: recommendationParams.minValence.toString(),
   });
 
   const fetchURL = `${spotifyURL}?${queryParams.toString()}`;
-  console.log("fetchURL: ", fetchURL);
+  console.log("\n fetchURL: ", fetchURL);
 
   const response = await fetch(fetchURL, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${recommendationParams.accessToken}`,
     },
   });
-
-  console.log("response: ", response);
 
   if (!response.ok) {
     const errorJson = await response.json();

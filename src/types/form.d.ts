@@ -1,3 +1,4 @@
+import { FeatureOptionsMax } from "./form.d";
 import { FeatureOptions } from "@/types/form";
 import { FormValues } from "@/types/form";
 import {
@@ -30,25 +31,25 @@ export type Body = {
 export type FormValues = {
   artists: OptionsValues[];
   genres: OptionsValues[];
-  features: FeatureOptionsMin | FeatureOptionsMax;
+  features: FeatureOptionsMin & FeatureOptionsMax;
 };
 
 export type FeatureOptionsMin = {
-  popularity_min: number;
-  energy_min: number;
-  danceability_min: number;
-  instrumentalness_min: number;
-  tempo_min: number;
-  valence_min: number;
+  popularity_min: string;
+  energy_min: string;
+  danceability_min: string;
+  instrumentalness_min: string;
+  tempo_min: string;
+  valence_min: string;
 };
 
 export type FeatureOptionsMax = {
-  popularity_max: number;
-  energy_max: number;
-  danceability_max: number;
-  instrumentalness_max: number;
-  tempo_max: number;
-  valence_max: number;
+  popularity_max: string;
+  energy_max: string;
+  danceability_max: string;
+  instrumentalness_max: string;
+  tempo_max: string;
+  valence_max: string;
 };
 
 export type FeatureOptionsMinKeys = keyof FeatureOptionsMin;
@@ -66,10 +67,9 @@ export type OptionsValues = { label: string; value: string };
 
 export type GenreObject = { id: number; genre: string; [key]: any };
 
-export type RecommendationParams = {
-  accessToken: string;
-  seedArtists: string;
-  seedGenres: string;
-  seedTracks: string;
-  minValence: string;
-};
+export type RecommendationParams = FeatureOptionsMin &
+  FeatureOptionsMax & {
+    seed_artists: string;
+    seed_genres: string;
+    // seed_tracks: string;
+  };

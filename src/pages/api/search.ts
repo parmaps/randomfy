@@ -1,3 +1,4 @@
+import { RecommendationParams } from "@/types/form";
 import { NextApiRequest, NextApiResponse } from "next";
 import { createSearch } from "@/controllers/searchController";
 
@@ -6,11 +7,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { method } = req;
-
+  
   switch (method) {
     case "POST":
       try {
-        await createSearch(req, res);
+        const formInputs: RecommendationParams = JSON.parse(req.body)
+        await createSearch(req, res, formInputs);
       } catch (error) {
         console.error("Error handling POST request:", error);
         res.status(500).json({ error: "Internal server error" });

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { OptionsValues } from "@/types/form";
-import { mapGenresToOptionsValues } from "../utils/strings";
+import { mapGenresToOptionsValues } from "../utils/mappings";
 
 const useFetchGenresRandomfy = () => {
   const firstUpdate = useRef(true);

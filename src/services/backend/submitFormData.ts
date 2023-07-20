@@ -1,5 +1,5 @@
 import { FormValues, RecommendationParams } from "@/types/form";
-import { mapOptionsValuesToString } from "@/utils/strings";
+import { mapOptionsValuesToString } from "@/utils/mappings";
 
 export async function mapFormData(formData: FormValues) {
   const { artists, genres, features } = formData;

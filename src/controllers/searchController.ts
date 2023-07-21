@@ -22,8 +22,8 @@ export async function createSearch(
     const seed_tracks = '""';
 
     // TODO 17/7 armar funcion para pedir access token a DB
-    const accessToken =
-      "BQALTRsYUHM19FMFnyMMdYdgNbVuvLg6tcxlT5TQIS2sq8h6f6tcF62Mu2s6UVmTHf3ZWcMCbEM7zi_LyrVO0c146rZI1Yz8Le1x3KlNfh5svVhXB9qZSYybFHS71eTrzYpjnTlCYsTIh1POPCZCFjYHLelbINVD9lA6Wcikv52vfhwdLlRiPrdOztkk3Md_17zF6Db8OhIC6PDim8E9MbVsqRjtIKXD5Ve3hnp4VFzg-6cLwtonRRwA2DMyT4IViWNTAfGmB3fiBg";
+    const accessToken = process.env.ACCESS_TOKEN as string;
+
     const artistType = "artist";
     const artistData = await getArtistIdByName(
       seed_artists,

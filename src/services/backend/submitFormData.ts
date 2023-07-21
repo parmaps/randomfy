@@ -1,18 +1,20 @@
 import { FormValues, RecommendationParams } from "@/types/form";
-import { mapOptionsValuesToString } from "@/utils/mappings";
+import { mapOptionsValuesToString, scaleFeatures } from "@/utils/mappings";
 
 export async function mapFormData(formData: FormValues) {
   const { artists, genres, features } = formData;
-  const mappedArtists = await mapOptionsValuesToString(artists);
-  const mappedGenres = await mapOptionsValuesToString(genres);
+  const mappedArtists = mapOptionsValuesToString(artists);
+  const mappedGenres = mapOptionsValuesToString(genres);
+  const scaledFeatures = scaleFeatures(features)
   return {
     seed_artists: mappedArtists,
     seed_genres: mappedGenres,
-    ...features,
+    ...scaledFeatures,
   };
 }
 
 export async function submitFormData(formInputs: RecommendationParams) {
+    console.log("form input", formInputs);
   const fetchURL = "http://localhost:3000/api/search";
   const jsonBody = JSON.stringify(formInputs);
   const fetchOptions = { method: "POST", body: jsonBody };

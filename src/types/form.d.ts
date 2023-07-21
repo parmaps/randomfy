@@ -31,7 +31,7 @@ export type Body = {
 export type FormValues = {
   artists: OptionsValues[];
   genres: OptionsValues[];
-  features: FeatureOptionsMin & FeatureOptionsMax;
+  features: Features;
 };
 
 export type FeatureOptionsMin = {
@@ -52,6 +52,8 @@ export type FeatureOptionsMax = {
   valence_max: string;
 };
 
+export type Features = FeatureOptionsMin & FeatureOptionsMax;
+
 export type FeatureOptionsMinKeys = keyof FeatureOptionsMin;
 export type FeatureOptionsMinString = `features.${Extract<
   FeatureOptionsMinKeys,
@@ -67,8 +69,7 @@ export type OptionsValues = { label: string; value: string };
 
 export type GenreObject = { id: number; genre: string; [key]: any };
 
-export type RecommendationParams = FeatureOptionsMin &
-  FeatureOptionsMax & {
+export type RecommendationParams = Features & {
     seed_artists: string;
     seed_genres: string;
     // seed_tracks: string;

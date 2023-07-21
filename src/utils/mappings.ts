@@ -23,8 +23,7 @@ export const mapOptionsValuesToString = async (
 
 export const mapQueryParams = (params: RecommendationParams) => {
   return new URLSearchParams({
-    // seed_artists: recommendationParams.seed_artists,
-    seed_artists: "4NHQUGzhtTLFvgF5SZesLK",
+    seed_artists: params.seed_artists,
     seed_genres: params.seed_genres || "",
     // seed_tracks: recommendationParams.seed_tracks, // TODO 19/7 ver si lo agrego en V2.0
     min_popularity: params.popularity_min, // TODO parsear a int, ver donde conviene

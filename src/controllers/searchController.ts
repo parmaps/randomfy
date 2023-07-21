@@ -16,22 +16,42 @@ export async function createSearch(
   }
 
   try {
-    const { artist, track } = req.body;
+    console.log("formInputs: ", formInputs);
+    const seed_artists = formInputs.seed_artists || '""';
+    console.log("seed artists: " + seed_artists);
+    const seed_tracks = '""';
+
     // TODO 17/7 armar funcion para pedir access token a DB
     const accessToken =
       "BQALTRsYUHM19FMFnyMMdYdgNbVuvLg6tcxlT5TQIS2sq8h6f6tcF62Mu2s6UVmTHf3ZWcMCbEM7zi_LyrVO0c146rZI1Yz8Le1x3KlNfh5svVhXB9qZSYybFHS71eTrzYpjnTlCYsTIh1POPCZCFjYHLelbINVD9lA6Wcikv52vfhwdLlRiPrdOztkk3Md_17zF6Db8OhIC6PDim8E9MbVsqRjtIKXD5Ve3hnp4VFzg-6cLwtonRRwA2DMyT4IViWNTAfGmB3fiBg";
     const artistType = "artist";
-    const artistData = await getArtistIdByName(artist, artistType, accessToken);
+    const artistData = await getArtistIdByName(
+      seed_artists,
+      artistType,
+      accessToken
+    );
 
-    const trackType = "track";
-    const trackData = await getTrackIdByName(track, trackType, accessToken);
+    // const trackType = "track";
+    // const trackData = await getTrackIdByName(
+    //   seed_tracks,
+    //   trackType,
+    //   accessToken
+    // );
+
+    const formInputsWithIds: RecommendationParams = {
+      ...formInputs,
+      seed_artists: artistData.artistId,
+    };
 
     // const seedArtists = artistData.artistId;
-    const recommendations = await getRecommendations(formInputs, accessToken);
+    const recommendations = await getRecommendations(
+      formInputsWithIds,
+      accessToken
+    );
 
     console.log("recommendation data (from controller): ", recommendations);
 
-    res.status(200).json({ artistData, trackData });
+    res.status(200).json({ artistData });
 
     // const {userId, searchData} = req.body;
     // TODO 17/7 -> userID deberia venir de getUserById o algo asi (buscar el mail actual logeado y devolver su id)

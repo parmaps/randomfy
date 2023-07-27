@@ -2,7 +2,6 @@
 import { Body, Response } from "@/types/form";
 import type { NextApiRequest, NextApiResponse } from "next";
 const querystring = require("querystring");
-const request = require("request"); // "Request" library
 const fetch = require("node-fetch");
 
 export default async function handler(
@@ -13,8 +12,6 @@ export default async function handler(
   // var state = generateRandomString(16);
   // const state = req.query.state || null;
   // const storedState = req.cookies ? req.cookies[stateKey] : null;
-
-  // console.log("code: " + code);
 
   const authURL = "https://accounts.spotify.com/api/token";
   const code = req.query.code as string;
@@ -45,7 +42,7 @@ export default async function handler(
     const accessToken: string = body.access_token;
     const refreshToken: string = body.refresh_token;
 
-    // Use the access token to access the Spotify Web API
+    // Use access token to access Spotify Web API
     const spotifyURL = "https://api.spotify.com/v1/me";
     const spotifyOptions = {
       headers: { Authorization: "Bearer " + accessToken },
@@ -59,6 +56,29 @@ export default async function handler(
       const body = await spotifyResponse.json();
       console.log("request get ME body:", body);
 
+      const user = body;
+      const userTokens = { accessToken, refreshToken };
+
+      const userURL = "http://localhost:3000/api/users";
+      const userOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user, userTokens }),
+      };
+
+      try {
+        const userResponse = await fetch(userURL, userOptions);
+        if (!userResponse.ok) {
+          throw new Error("Failed to create user");
+        }
+        const body = await userResponse.json();
+        console.log("new user:", body);
+      } catch (error) {
+        throw error;
+      }
+
       // Refresh access token if current is invalid
       if (body.error?.status === 401) {
         res.redirect(
@@ -68,24 +88,20 @@ export default async function handler(
               refresh_token: refreshToken,
             })
         );
-      } else res.redirect("/");
+      }
+      // Proceed to login
+      else res.redirect("/");
     } catch (error) {
       console.log("error", error);
+      throw error;
     }
-
-    // res.send({
-    //   'access_token': accessToken
-    // });
   } catch (error) {
-    // res.status(500).send({ error: "Failed to refresh token" });
     res.redirect(
       "/#" +
         querystring.stringify({
           error: "invalid_token",
         })
     );
+    throw error;
   }
 }
-
-
-

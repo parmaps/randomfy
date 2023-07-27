@@ -10,7 +10,9 @@ export default async function handler(
   switch (method) {
     case "POST":
       try {
-        await createUser(req, res);
+        console.log("trying to create a new user from api/users");
+        console.log("log body", req.body);
+        await createUser(req, res, req.body);
         res.status(201).json({ message: "User created successfully" });
       } catch (error) {
         console.error("Error creating user:", error);

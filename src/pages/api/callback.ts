@@ -3,7 +3,7 @@ import { Body, Response } from "@/types/form";
 import type { NextApiRequest, NextApiResponse } from "next";
 const querystring = require("querystring");
 const request = require("request"); // "Request" library
-
+const fetch = require("node-fetch");
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,75 +16,76 @@ export default async function handler(
 
   // console.log("code: " + code);
 
-  const auth_url: string = "https://accounts.spotify.com/api/token";
-  const code = req.query.code || null;
+  const authURL = "https://accounts.spotify.com/api/token";
+  const code = req.query.code as string;
   const redirect_uri: string = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
   const client_id: string = process.env.NEXT_PUBLIC_CLIENT_ID as string;
   const client_secret: string = process.env.CLIENT_SECRET as string;
   const authorization: string =
     "Basic " + Buffer.from(client_id + ":" + client_secret).toString("base64");
+  const authContentType = "application/x-www-form-urlencoded";
 
-  let authOptions = {
-    url: auth_url,
+  const authOptions = {
     method: "POST",
-    form: {
+    headers: { authorization, "Content-Type": authContentType },
+    body: new URLSearchParams({
+      grant_type: "authorization_code",
       code: code,
       redirect_uri: redirect_uri,
-      grant_type: "authorization_code",
-    },
-    headers: {
-      Authorization: authorization,
-    },
-    json: true,
+    }),
   };
 
-  request.post(
-    authOptions,
-    function (error: string, response: Response, body: Body) {
-      console.log("request body:", body);
+  try {
+    const authResponse = await fetch(authURL, authOptions);
+    if (!authResponse.ok) {
+      throw new Error("Failed to generate access token");
+    }
+    const body = await authResponse.json();
+    console.log("request body:", body);
+    const accessToken: string = body.access_token;
+    const refreshToken: string = body.refresh_token;
 
-      if (!error && response.statusCode === 200) {
-        const access_token: string = body.access_token;
-        const refresh_token: string = body.refresh_token;
-        // WIP 10/6 change flow to DB and delete this
-        // Generate fake access token to check refresh token flow
-        // const fake_access_token = "1234";
+    // Use the access token to access the Spotify Web API
+    const spotifyURL = "https://api.spotify.com/v1/me";
+    const spotifyOptions = {
+      headers: { Authorization: "Bearer " + accessToken },
+    };
 
-        var options = {
-          url: "https://api.spotify.com/v1/me",
-          headers: { Authorization: "Bearer " + access_token },
-          json: true,
-        };
+    try {
+      const spotifyResponse = await fetch(spotifyURL, spotifyOptions);
+      if (!spotifyResponse.ok) {
+        throw new Error("Failed to generate access token");
+      }
+      const body = await spotifyResponse.json();
+      console.log("request get ME body:", body);
 
-        // use the access token to access the Spotify Web API
-        request.get(
-          options,
-          function (error: string, response: Response, body: Body) {
-            console.log("request get ME body", body);
-
-            // refresh access token if current is invalid
-            if (body.error?.status === 401) {
-              // redirect to /refresh_token
-              res.redirect(
-                "/api/refreshToken?" +
-                  querystring.stringify({
-                    access_token: access_token,
-                    refresh_token: refresh_token,
-                  })
-              );
-            }
-
-            else res.redirect("/");
-          }
-        );
-      } else {
+      // Refresh access token if current is invalid
+      if (body.error?.status === 401) {
         res.redirect(
-          "/#" +
+          "/api/refreshToken?" +
             querystring.stringify({
-              error: "invalid_token",
+              access_token: accessToken,
+              refresh_token: refreshToken,
             })
         );
-      }
+      } else res.redirect("/");
+    } catch (error) {
+      console.log("error", error);
     }
-  );
+
+    // res.send({
+    //   'access_token': accessToken
+    // });
+  } catch (error) {
+    // res.status(500).send({ error: "Failed to refresh token" });
+    res.redirect(
+      "/#" +
+        querystring.stringify({
+          error: "invalid_token",
+        })
+    );
+  }
 }
+
+
+
